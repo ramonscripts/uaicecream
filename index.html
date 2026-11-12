@@ -454,7 +454,7 @@ section.alt{background:var(--surface)}
     <div class="sec-head">
       <span class="step">Catálogo · demonstração</span>
       <h2>Escolhe o seu, sô!</h2>
-      <p>Treze sabores, todos com recheio cremoso por dentro. Adicione ao carrinho para simular um pedido; nada é cobrado.</p>
+      <p>Catorze sabores, todos com recheio cremoso por dentro. Adicione ao carrinho para simular um pedido; nada é cobrado.</p>
     </div>
     <div class="zero-band">
       <div>
@@ -663,6 +663,7 @@ const PRODUCTS = [
   {id:'limao', name:'Limão com hortelã', desc:'Cítrico e refrescante, com recheio cremoso de limão.', bg:C.menta, body:'#E8F7C8', fill:'#7CC46A', tags:['zero']},
   {id:'maracuja', name:'Maracujá', desc:'Azedinho na medida, com recheio cremoso de maracujá.', bg:C.caramelo, body:'#FFE58A', fill:'#E3A51C', tags:['zero']},
   {id:'avela', name:'Creme de avelã mineiro', desc:'Creme de avelã caseiro, receita mineira, com pedaços de avelã no recheio cremoso.', bg:C.caramelo, body:'#E3B98A', fill:'#6B3A2A', tags:['mineiro'], cut:true},
+  {id:'milho', name:'Milho verde', desc:'Clássico de festa junina mineira: creme de milho verde com recheio cremoso e grãos de milho.', bg:'#F7D046', body:'#FFF1B8', fill:'#E8B923', tags:['mineiro'], cut:true, dots:'#FFF1B8'},
   {id:'choco-menta', name:'Choco menta proteico', desc:'Recheio cremoso de menta com casquinha de chocolate proteico, sem adição de açúcar.', bg:C.menta, body:'#4A2418', fill:'#9FE3C7', tags:['proteico','zero'], cut:true},
   {id:'monster-trad', name:'Monster Tradicional Zero', desc:'Pré-treino gelado com o sabor do Monster tradicional. Zero açúcar, com cafeína.', bg:'#9BE22D', body:'#1E1E1E', fill:'#9BE22D', tags:['monster','pre','zero'], dark:true, btn:'monster'},
   {id:'monster-mango', name:'Monster Mango Loko Zero', desc:'Pré-treino com sabor de manga e frutas tropicais do Mango Loko. Zero açúcar, com cafeína.', bg:'#FF8A1F', body:'#FFB347', fill:'#1FB5A8', tags:['monster','pre','zero'], dark:true, btn:'monster'},
@@ -676,7 +677,7 @@ function pop(p, label, cut){
   const id = 'c' + (uid++);
   const body = 'M30 52 C30 24 44 10 60 10 C76 10 90 24 90 52 L90 118 C90 124 86 128 80 128 L40 128 C34 128 30 124 30 118 Z';
   const filling = cut
-    ? `<g clip-path="url(#${id})"><path d="M48 36 C48 28 54 24 60 24 C66 24 72 28 72 36 L72 108 C72 112 68 114 60 114 C52 114 48 112 48 108 Z" fill="${p.fill}"/>${p.id==='avela'?'<circle cx="56" cy="52" r="3" fill="#E3B98A"/><circle cx="64" cy="70" r="3.5" fill="#E3B98A"/><circle cx="55" cy="88" r="3" fill="#E3B98A"/><circle cx="65" cy="100" r="2.5" fill="#E3B98A"/>':''}</g>`
+    ? `<g clip-path="url(#${id})"><path d="M48 36 C48 28 54 24 60 24 C66 24 72 28 72 36 L72 108 C72 112 68 114 60 114 C52 114 48 112 48 108 Z" fill="${p.fill}"/>${p.dots||p.id==='avela'?'<circle cx="56" cy="52" r="3" fill="'+(p.dots||'#E3B98A')+'"/><circle cx="64" cy="70" r="3.5" fill="'+(p.dots||'#E3B98A')+'"/><circle cx="55" cy="88" r="3" fill="'+(p.dots||'#E3B98A')+'"/><circle cx="65" cy="100" r="2.5" fill="'+(p.dots||'#E3B98A')+'"/>':''}</g>`
     : `<g clip-path="url(#${id})"><path d="M20 10 H100 V36 C96 36 94 44 90 44 C86 44 86 54 80 54 C74 54 74 40 68 40 C62 40 62 50 56 50 C50 50 50 38 44 38 C38 38 38 46 32 46 C26 46 24 36 20 36 Z" fill="${p.fill}"/></g>`;
   return `<svg viewBox="0 0 120 180" ${label?`role="img" aria-label="${label}"`:'aria-hidden="true"'}>
     <defs><clipPath id="${id}"><path d="${body}"/></clipPath></defs>
