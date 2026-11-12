@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>uaice cream — Planejamento de marketing da linha uaice fit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#FAF9F6; --surface:#F2F0EB; --surface-2:#E6E1D9;
+  --ink:#4A2418; --ink-2:#6B3A2A; --stroke:#4A2418;
+  --link:#B8285A; --tint:#DDF3E9; --tint-ink:#1F6E52;
+  --choco:#4A2418; --cream:#FFF4E6; --morango:#E8457A; --morango-700:#B8285A;
+  --menta:#3FB58A; --menta-700:#1F6E52; --caramelo:#F2B35B;
+  --cola:#C41E2D; --zero:#161616; --white:#FFFFFF;
+  --focus:#1F6E52;
+  --display:"Fredoka","Nunito",system-ui,sans-serif;
+  --body:"Nunito",system-ui,sans-serif;
+  --r-sm:8px; --r-md:16px; --r-lg:28px; --pill:999px;
+  --shadow:0 5px 0 var(--stroke);
+  --soft:0 10px 28px rgba(74,36,24,.14);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 84px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+img,svg{max-width:100%}
+a{color:var(--link)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+h2,h3{font-family:var(--display)}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:var(--ink);font-family:var(--display);line-height:1}
+.logo .u{font-size:28px;letter-spacing:-1px}
+.logo .u b{font-weight:700}.logo .u span{font-weight:400}
+.logo .p{font-size:19px;font-weight:700;background:var(--menta);color:var(--choco);border-radius:var(--pill);padding:1px 11px 5px;transform:rotate(-4deg);display:inline-block}
+.logo .p.cream{background:var(--morango);color:var(--white)}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:2px solid var(--surface-2)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:72px}
+nav.main{display:flex;align-items:center;gap:4px}
+nav.main a.nl{color:var(--ink);text-decoration:none;font-weight:700;padding:10px 12px;border-radius:var(--pill)}
+nav.main a.nl:hover{background:var(--surface-2)}
+@media (max-width:900px){nav.main a.nl{display:none}}
+
+/* botões */
+.btn{font-family:var(--display);font-size:18px;font-weight:600;min-height:48px;padding:0 26px;border-radius:var(--pill);border:2px solid var(--stroke);box-shadow:var(--shadow);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:transform .12s,box-shadow .12s;white-space:nowrap}
+.btn:hover{transform:translateY(2px);box-shadow:0 3px 0 var(--stroke)}
+.btn:active{transform:translateY(5px);box-shadow:none}
+.btn.primary{background:var(--morango-700);color:var(--white)}
+.btn.secondary{background:var(--menta);color:var(--choco)}
+.btn.outline{background:transparent;color:var(--ink);box-shadow:none;border-color:var(--ink)}
+.btn.zero{background:var(--cola);color:var(--white);border-color:var(--white);box-shadow:0 5px 0 #000}
+.btn.sm{min-height:44px;font-size:16px;padding:0 18px}
+.count{background:var(--white);color:var(--morango-700);border-radius:var(--pill);min-width:24px;height:24px;display:inline-grid;place-items:center;font-family:var(--body);font-weight:800;font-size:13px;padding:0 6px}
+
+.badge{font-family:var(--body);font-size:12px;line-height:16px;font-weight:800;padding:4px 10px;border-radius:var(--pill);display:inline-block}
+.b-zero{background:var(--tint);color:var(--tint-ink)}
+.b-vegano{background:var(--menta);color:var(--choco)}
+.b-proteico{background:var(--caramelo);color:var(--choco)}
+.b-mineiro{background:var(--morango-700);color:var(--white)}
+.b-cola{background:var(--cola);color:var(--white)}
+.b-chefe{background:var(--choco);color:var(--cream)}
+
+/* capa */
+.cover{padding:56px 0 64px;position:relative;overflow:hidden}
+.cover .meta{font-weight:800;color:var(--ink-2);margin:0 0 18px;font-size:16px}
+.bigname{font-family:var(--display);line-height:.9;display:flex;align-items:center;flex-wrap:wrap;gap:.12em;margin:0 0 24px;font-size:clamp(54px,14vw,176px);letter-spacing:-.04em;color:var(--ink)}
+.bigname b{font-weight:700}.bigname span.ce{font-weight:400}
+.bigname .p{font-size:.72em;font-weight:700;letter-spacing:-.02em;background:var(--morango);color:var(--white);border-radius:var(--pill);padding:.02em .32em .12em;transform:rotate(-4deg);display:inline-block}
+.cover h1.sub{font-family:var(--display);font-weight:600;font-size:clamp(22px,3vw,32px);line-height:1.2;margin:0;max-width:28ch}
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:960px){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.team{grid-template-columns:1fr}}
+.member{background:var(--surface);border:2px solid var(--stroke);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow)}
+.member .role{display:inline-block;font-weight:800;font-size:13px;padding:3px 10px;border-radius:var(--pill);margin-bottom:10px}
+.member h3{font-size:20px;line-height:1.2;margin:0 0 4px;font-weight:600}
+.member p{margin:0;color:var(--ink-2);font-size:14px;font-weight:700}
+.cover .cta{margin-top:36px}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+
+.cover-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center;margin-bottom:36px}
+.qrcard{background:var(--white);border:2px solid var(--stroke);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:20px;width:260px;text-align:center;color:#4A2418;transform:rotate(2deg)}
+.qrcard .qr{width:100%;height:auto;display:block;margin-bottom:12px}
+.qrcard b{font-family:var(--display);font-size:22px;font-weight:700;display:block;line-height:1.15}
+.qrcard span{font-size:14px;color:#6B3A2A}
+@media (max-width:860px){.cover-top{grid-template-columns:1fr}.qrcard{display:none}}
+
+/* seções */
+section.block{padding:88px 0}
+section.alt{background:var(--surface)}
+.sec-head{margin-bottom:36px;max-width:720px}
+.sec-head .step{display:inline-block;font-weight:800;color:var(--tint-ink);background:var(--tint);border-radius:var(--pill);padding:4px 12px;font-size:14px;margin-bottom:14px}
+.sec-head h2{font-weight:700;font-size:clamp(36px,5vw,56px);line-height:1;letter-spacing:-1px;margin:0 0 12px}
+.sec-head p{margin:0;color:var(--ink-2);font-size:19px;max-width:56ch}
+.src{font-size:13px;color:var(--ink-2);margin-top:18px}
+
+/* produto */
+.product{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+@media (max-width:860px){.product{grid-template-columns:1fr}}
+.product h2{font-weight:700;font-size:clamp(44px,6.5vw,80px);line-height:.95;letter-spacing:-2px;margin:14px 0 18px}
+.product .lead{font-size:20px;color:var(--ink-2);margin:0 0 24px;max-width:40ch}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.spec{background:var(--surface);border-radius:var(--r-md);padding:14px 16px}
+.spec b{font-family:var(--display);font-size:28px;font-weight:700;display:block;line-height:1.1}
+.spec span{color:var(--ink-2);font-size:14px}
+.note{font-size:13px;color:var(--ink-2);margin:0}
+.stage{position:relative;background:var(--caramelo);border:2px solid var(--stroke);border-radius:var(--r-lg);box-shadow:var(--shadow);min-height:460px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.stage .big{width:min(60%,250px);transform:rotate(8deg);margin-bottom:-6px}
+.stage .tag{position:absolute;top:26px;left:22px;background:var(--choco);color:var(--cream);font-family:var(--display);font-weight:600;font-size:20px;padding:6px 18px 9px;border-radius:var(--pill);transform:rotate(-4deg)}
+.stage .tag small{display:block;font-family:var(--body);font-size:13px;font-weight:700;color:var(--caramelo)}
+.stage .dot{position:absolute;border-radius:50%}
+
+/* números */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.stats{grid-template-columns:1fr}}
+.stat{border:2px solid var(--stroke);border-radius:var(--r-lg);padding:24px;background:var(--bg)}
+.stat b{font-family:var(--display);font-weight:700;font-size:64px;line-height:1;letter-spacing:-2px;display:block;margin-bottom:10px}
+.stat p{margin:0;color:var(--ink-2)}
+.quote{margin:28px 0 0;font-family:var(--display);font-size:clamp(22px,3vw,30px);line-height:1.25;font-weight:600;max-width:36ch}
+
+/* swot */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.panel{background:var(--surface);border-radius:var(--r-lg);padding:26px}
+.panel h3{font-size:26px;margin:0 0 10px;font-weight:700}
+.panel p{margin:0 0 10px;color:var(--ink-2)}
+.swot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+@media (max-width:640px){.swot{grid-template-columns:1fr}}
+.sw{border-radius:var(--r-lg);padding:22px;border:2px solid var(--stroke)}
+.sw h3{margin:0 0 10px;font-size:24px;font-weight:700}
+.sw ul{margin:0;padding-left:20px}
+.sw li{margin:4px 0}
+
+/* público */
+.persona{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px}
+@media (max-width:860px){.persona{grid-template-columns:1fr}}
+.when{display:flex;flex-direction:column;gap:12px}
+.when div{background:var(--surface);border-radius:var(--r-md);padding:16px 18px;display:flex;gap:14px;align-items:center}
+.when svg{flex:none;width:32px;height:32px;color:var(--tint-ink)}
+.when b{font-family:var(--display);font-size:19px;font-weight:600;display:block}
+.when span{color:var(--ink-2);font-size:15px}
+
+/* catálogo */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.chip{font-family:var(--body);font-weight:800;font-size:15px;min-height:44px;padding:0 18px;border-radius:var(--pill);border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:24px}
+@media (max-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.card{background:var(--bg);border:2px solid var(--stroke);border-radius:var(--r-lg);box-shadow:var(--soft);padding:12px;display:flex;flex-direction:column;gap:12px}
+.card.dark{background:var(--zero);color:var(--white);border-color:#000}
+.card.chefe{grid-column:span 2;flex-direction:row;align-items:stretch}
+.card.chefe .media{flex:0 0 44%;height:auto;min-height:260px}
+.card.chefe h3{font-size:30px}
+@media (max-width:600px){.card.chefe{grid-column:auto;flex-direction:column}.card.chefe .media{min-height:180px}}
+.card .media{height:180px;border-radius:var(--r-md);display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.card .media svg{width:96px;margin-bottom:-4px}
+.card.chefe .media svg{width:130px}
+.card .body{display:flex;flex-direction:column;gap:12px;flex:1}
+.card .info{padding:0 8px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{font-size:22px;line-height:1.15;font-weight:600;margin:0}
+.card p{margin:0;font-size:15px;line-height:1.45;color:var(--ink-2)}
+.card.dark p{color:#E0E0E0}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap}
+.card .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 8px 8px}
+.price{font-family:var(--display);font-size:24px;font-weight:700}
+.empty{grid-column:1/-1;text-align:center;padding:48px 0;color:var(--ink-2)}
+.cart-bar{position:sticky;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;justify-content:flex-end;margin-top:28px;pointer-events:none}
+.cart-bar .btn{pointer-events:auto}
+
+/* zero */
+.zero-band{background:var(--zero);color:var(--white);border-radius:var(--r-lg);padding:28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;margin-bottom:28px}
+@media (max-width:700px){.zero-band{grid-template-columns:1fr}}
+.collab{font-family:var(--display);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:20px;margin-bottom:8px}
+.collab .u b{font-weight:700}.collab .u{font-size:28px;letter-spacing:-1px}
+.collab .p{font-weight:700;background:var(--cola);color:var(--white);border-radius:var(--pill);padding:1px 11px 5px;transform:rotate(-4deg);display:inline-block}
+.zero-band p{margin:0;color:#E6E6E6}
+
+/* planejamento */
+.goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.goals{grid-template-columns:1fr}}
+.goal{border:2px solid var(--stroke);border-radius:var(--r-lg);padding:26px;box-shadow:var(--shadow);background:var(--bg)}
+.goal small{font-weight:800;color:var(--ink-2)}
+.goal b{font-family:var(--display);font-size:72px;line-height:1;letter-spacing:-2px;display:block;margin:10px 0 6px}
+.goal p{margin:0;color:var(--ink-2)}
+.ps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+@media (max-width:960px){.ps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ps{grid-template-columns:1fr}}
+.pcard{border-radius:var(--r-lg);padding:22px}
+.pcard h3{margin:0 0 8px;font-size:24px;font-weight:700}
+.pcard p{margin:0}
+.pricing{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:700px){.pricing{grid-template-columns:1fr}}
+.pricing div{background:var(--bg);border-radius:var(--r-md);padding:18px 20px;border:2px solid var(--surface-2)}
+.pricing b{font-family:var(--display);font-size:40px;font-weight:700;display:block;line-height:1.1}
+.pricing span{color:var(--ink-2)}
+
+/* logística */
+.route{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative;margin-top:8px}
+@media (max-width:860px){.route{grid-template-columns:1fr 1fr;gap:16px}}
+@media (max-width:520px){.route{grid-template-columns:1fr}}
+.stop{padding:0 16px 0 0;position:relative}
+.stop .bullet{width:44px;height:44px;border-radius:50%;background:var(--menta);border:2px solid var(--stroke);display:grid;place-items:center;font-family:var(--display);font-weight:700;color:var(--choco);margin-bottom:12px;position:relative;z-index:1}
+.stop:not(:last-child)::after{content:"";position:absolute;top:21px;left:44px;right:0;border-top:3px dashed var(--ink-2);opacity:.5}
+@media (max-width:860px){.stop::after{display:none}}
+.stop h3{font-size:20px;margin:0 0 4px;font-weight:600}
+.stop p{margin:0;color:var(--ink-2);font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px}
+@media (max-width:760px){.flow{grid-template-columns:1fr}}
+.flow div{background:var(--surface);border-radius:var(--r-md);padding:18px}
+.flow b{font-family:var(--display);font-size:19px;font-weight:600;display:block;margin-bottom:4px}
+.flow span{color:var(--ink-2);font-size:15px}
+
+/* investimento */
+.invest{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:900px){.invest{grid-template-columns:1fr}}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar .lbl{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:15px;margin-bottom:4px}
+.bar .lbl span:last-child{font-family:var(--display);font-weight:600;white-space:nowrap}
+.bar .track{height:14px;background:var(--surface-2);border-radius:var(--pill);overflow:hidden}
+.bar .fill{height:100%;border-radius:var(--pill);background:var(--menta)}
+.bar small{color:var(--ink-2);font-size:13px}
+.sum{background:var(--choco);color:var(--cream);border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;gap:16px}
+.sum div{border-bottom:1px solid rgba(255,244,230,.25);padding-bottom:14px}
+.sum div:last-of-type{border-bottom:0;padding-bottom:0}
+.sum small{color:#E9D3BF;font-weight:700}
+.sum b{font-family:var(--display);font-size:40px;line-height:1.1;display:block;font-weight:700}
+.sum p{margin:0;color:#E9D3BF;font-size:14px}
+
+/* promoção */
+.posts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:760px){.posts{grid-template-columns:1fr}}
+.post{border:2px solid var(--stroke);border-radius:var(--r-lg);overflow:hidden;background:var(--bg)}
+.post .img{height:200px;display:flex;align-items:flex-end;justify-content:center;gap:24px;overflow:hidden}
+.post .img svg{width:90px;margin-bottom:-4px}
+.post .cap{padding:18px 20px}
+.post .cap b{font-family:var(--display);font-weight:600;font-size:18px;display:block;margin-bottom:6px}
+.post .cap p{margin:0;color:var(--ink-2);font-size:15px}
+.channels{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+/* tabela kpi */
+.tbl{width:100%;border-collapse:collapse;min-width:560px}
+.tbl th,.tbl td{text-align:left;padding:14px 16px;border-bottom:2px solid var(--surface-2);vertical-align:top}
+.tbl th{font-family:var(--display);font-weight:600;font-size:16px}
+.scroll{overflow-x:auto;background:var(--bg);border-radius:var(--r-lg);border:2px solid var(--surface-2)}
+
+/* final */
+.end{background:var(--choco);color:var(--cream);padding:96px 0 72px}
+.end .bigname{color:var(--cream)}
+.end .quote{color:var(--cream);margin:0 0 40px}
+.end .member{background:transparent;border-color:var(--cream);box-shadow:none}
+.end .member h3{color:var(--cream)}
+.end .member p{color:#E9D3BF}
+.end .meta{color:#E9D3BF}
+.refs{margin-top:56px;border-top:1px solid rgba(255,244,230,.25);padding-top:28px}
+.refs h3{font-size:22px;margin:0 0 12px;font-weight:600}
+.refs ol{margin:0;padding-left:20px;color:#E9D3BF;font-size:14px}
+.refs li{margin:0 0 10px;overflow-wrap:anywhere}
+.refs a{color:#FFB8CF}
+
+/* carrinho */
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);border-left:2px solid var(--stroke);z-index:50;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(105%);transition:transform .25s ease;visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.scrim{position:fixed;inset:0;background:rgba(20,10,6,.45);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer h2{font-size:30px;margin:0;font-weight:700}
+.dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.icon-btn{width:44px;height:44px;border-radius:var(--pill);border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.lines{flex:1;overflow:auto;display:flex;flex-direction:column;gap:12px}
+.line{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--surface);border-radius:var(--r-md);padding:10px}
+.line .sw2{height:56px;border-radius:var(--r-sm);display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.line .sw2 svg{width:30px;margin-bottom:-2px}
+.line b{font-family:var(--display);font-weight:600;display:block;line-height:1.2}
+.line small{color:var(--ink-2)}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:36px;height:36px;border-radius:var(--pill);border:2px solid var(--ink);background:transparent;color:var(--ink);font-weight:800;font-size:18px;cursor:pointer}
+.qty span{min-width:20px;text-align:center;font-weight:800}
+.total{border-top:2px solid var(--surface-2);padding-top:16px;margin-top:12px;display:flex;flex-direction:column;gap:14px}
+.total .row{display:flex;justify-content:space-between;align-items:baseline}
+.total .note{font-size:13px;color:var(--ink-2);margin:0}
+.done{text-align:center;padding:40px 10px}
+.done h3{font-size:28px;margin:12px 0 6px}
+.done p{color:var(--ink-2);margin:0 0 20px}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--choco);color:var(--cream);padding:12px 20px;border-radius:var(--pill);font-weight:700;opacity:0;transition:all .2s;z-index:60;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (max-width:600px){
+  section.block{padding:56px 0}
+  .cover{padding:32px 0 48px}
+  .sec-head{margin-bottom:24px}
+  .sec-head p,.product .lead{font-size:17px}
+  .stat b{font-size:52px}
+  .goal b{font-size:56px}
+  .pricing b,.sum b{font-size:32px}
+  .stage{min-height:340px}
+  .specs .spec b{font-size:24px}
+  .panel,.sw,.goal,.stat{padding:20px}
+  .zero-band{padding:22px}
+  .end{padding:64px 0 48px}
+  .btn{padding:0 20px}
+  .cover .cta .btn{flex:1 1 auto}
+  header.top .wrap{min-height:64px}
+  .logo .u{font-size:24px}.logo .p{font-size:16px}
+  .tbl th,.tbl td{padding:12px}
+}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#capa" aria-label="uaice cream, voltar ao início"><span class="u"><b>uai</b><span>ce</span></span><span class="p cream">cream</span></a>
+    <nav class="main" aria-label="Seções">
+      <a class="nl" href="#produto">Produto</a>
+      <a class="nl" href="#mercado">Mercado</a>
+      <a class="nl" href="#catalogo">Catálogo</a>
+      <a class="nl" href="#planejamento">Planejamento</a>
+      <a class="nl" href="#investimento">Investimento</a>
+      <button class="btn primary sm" type="button" data-open-cart>Carrinho <span class="count" data-count>0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- CAPA -->
+<section class="cover" id="capa">
+  <div class="wrap">
+    <p class="meta">Trabalho de marketing · Universidade de Uberaba · 2026</p>
+    <div class="cover-top">
+      <div>
+        <div class="bigname" role="heading" aria-level="1" aria-label="uaice cream"><span><b>uai</b><span class="ce">ce</span></span><span class="p">cream</span></div>
+        <h1 class="sub">Planejamento de marketing para o lançamento da linha uaice fit</h1>
+      </div>
+      <div class="qrcard"><svg class="qr" viewBox="0 0 33 33" role="img" aria-label="QR code com o link deste site" shape-rendering="crispEdges"><path d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM11 0h1v1h-1zM16 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM23 0h1v1h-1zM26 0h1v1h-1zM27 0h1v1h-1zM28 0h1v1h-1zM29 0h1v1h-1zM30 0h1v1h-1zM31 0h1v1h-1zM32 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h1v1h-1zM12 1h1v1h-1zM15 1h1v1h-1zM16 1h1v1h-1zM18 1h1v1h-1zM22 1h1v1h-1zM24 1h1v1h-1zM26 1h1v1h-1zM32 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM8 2h1v1h-1zM9 2h1v1h-1zM11 2h1v1h-1zM12 2h1v1h-1zM14 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM26 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM32 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM8 3h1v1h-1zM10 3h1v1h-1zM18 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM26 3h1v1h-1zM28 3h1v1h-1zM29 3h1v1h-1zM30 3h1v1h-1zM32 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM11 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM23 4h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM13 5h1v1h-1zM14 5h1v1h-1zM18 5h1v1h-1zM19 5h1v1h-1zM21 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM11 7h1v1h-1zM12 7h1v1h-1zM16 7h1v1h-1zM19 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM22 7h1v1h-1zM23 7h1v1h-1zM24 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM0 9h1v1h-1zM2 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM13 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM19 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM23 9h1v1h-1zM26 9h1v1h-1zM27 9h1v1h-1zM29 9h1v1h-1zM30 9h1v1h-1zM32 9h1v1h-1zM0 10h1v1h-1zM1 10h1v1h-1zM3 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM14 10h1v1h-1zM15 10h1v1h-1zM17 10h1v1h-1zM22 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM1 11h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM13 11h1v1h-1zM15 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM19 11h1v1h-1zM21 11h1v1h-1zM25 11h1v1h-1zM28 11h1v1h-1zM29 11h1v1h-1zM30 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM10 12h1v1h-1zM12 12h1v1h-1zM14 12h1v1h-1zM15 12h1v1h-1zM16 12h1v1h-1zM20 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM25 12h1v1h-1zM28 12h1v1h-1zM29 12h1v1h-1zM32 12h1v1h-1zM1 13h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM11 13h1v1h-1zM15 13h1v1h-1zM18 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM32 13h1v1h-1zM3 14h1v1h-1zM5 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM10 14h1v1h-1zM13 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM26 14h1v1h-1zM28 14h1v1h-1zM29 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM0 15h1v1h-1zM1 15h1v1h-1zM3 15h1v1h-1zM4 15h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM11 15h1v1h-1zM12 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM18 15h1v1h-1zM21 15h1v1h-1zM23 15h1v1h-1zM24 15h1v1h-1zM25 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM30 15h1v1h-1zM0 16h1v1h-1zM1 16h1v1h-1zM2 16h1v1h-1zM3 16h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM11 16h1v1h-1zM12 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM20 16h1v1h-1zM22 16h1v1h-1zM25 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM29 16h1v1h-1zM32 16h1v1h-1zM0 17h1v1h-1zM1 17h1v1h-1zM2 17h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM7 17h1v1h-1zM9 17h1v1h-1zM10 17h1v1h-1zM15 17h1v1h-1zM16 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM29 17h1v1h-1zM30 17h1v1h-1zM32 17h1v1h-1zM0 18h1v1h-1zM1 18h1v1h-1zM3 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM13 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM26 18h1v1h-1zM27 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM2 19h1v1h-1zM4 19h1v1h-1zM8 19h1v1h-1zM11 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM31 19h1v1h-1zM32 19h1v1h-1zM2 20h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM18 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM4 21h1v1h-1zM8 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM13 21h1v1h-1zM15 21h1v1h-1zM16 21h1v1h-1zM20 21h1v1h-1zM21 21h1v1h-1zM25 21h1v1h-1zM26 21h1v1h-1zM29 21h1v1h-1zM30 21h1v1h-1zM32 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM21 22h1v1h-1zM24 22h1v1h-1zM28 22h1v1h-1zM29 22h1v1h-1zM31 22h1v1h-1zM0 23h1v1h-1zM7 23h1v1h-1zM9 23h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM14 23h1v1h-1zM16 23h1v1h-1zM19 23h1v1h-1zM20 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM26 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM31 23h1v1h-1zM0 24h1v1h-1zM3 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM9 24h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM19 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM30 24h1v1h-1zM8 25h1v1h-1zM9 25h1v1h-1zM10 25h1v1h-1zM11 25h1v1h-1zM14 25h1v1h-1zM17 25h1v1h-1zM18 25h1v1h-1zM19 25h1v1h-1zM20 25h1v1h-1zM21 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM30 25h1v1h-1zM31 25h1v1h-1zM32 25h1v1h-1zM0 26h1v1h-1zM1 26h1v1h-1zM2 26h1v1h-1zM3 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM10 26h1v1h-1zM15 26h1v1h-1zM17 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h1v1h-1zM31 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM13 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM29 27h1v1h-1zM30 27h1v1h-1zM0 28h1v1h-1zM2 28h1v1h-1zM3 28h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM12 28h1v1h-1zM13 28h1v1h-1zM15 28h1v1h-1zM16 28h1v1h-1zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM31 28h1v1h-1zM0 29h1v1h-1zM2 29h1v1h-1zM3 29h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM11 29h1v1h-1zM13 29h1v1h-1zM15 29h1v1h-1zM18 29h1v1h-1zM24 29h1v1h-1zM25 29h1v1h-1zM28 29h1v1h-1zM30 29h1v1h-1zM31 29h1v1h-1zM32 29h1v1h-1zM0 30h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM8 30h1v1h-1zM14 30h1v1h-1zM15 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM18 30h1v1h-1zM20 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM26 30h1v1h-1zM27 30h1v1h-1zM0 31h1v1h-1zM6 31h1v1h-1zM9 31h1v1h-1zM11 31h1v1h-1zM12 31h1v1h-1zM15 31h1v1h-1zM21 31h1v1h-1zM22 31h1v1h-1zM23 31h1v1h-1zM28 31h1v1h-1zM30 31h1v1h-1zM0 32h1v1h-1zM1 32h1v1h-1zM2 32h1v1h-1zM3 32h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM8 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM13 32h1v1h-1zM14 32h1v1h-1zM15 32h1v1h-1zM16 32h1v1h-1zM17 32h1v1h-1zM24 32h1v1h-1zM25 32h1v1h-1zM26 32h1v1h-1zM27 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1z" fill="#4A2418"/></svg><b>Abra no seu celular</b><span>Aponte a câmera para o código e acompanhe a apresentação.</span></div>
+    </div>
+    <div class="team" id="teamTop"></div>
+    <div class="cta">
+      <a class="btn primary" href="#catalogo">Ver os picolés</a>
+      <a class="btn outline" href="#produto">Conhecer o projeto</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTO -->
+<section class="block alt" id="produto">
+  <div class="wrap product">
+    <div>
+      <a class="logo" href="#produto" aria-label="uaice fit"><span class="u"><b>uai</b><span>ce</span></span><span class="p">fit</span></a>
+      <h2>Pequeno no tamanho, cheio de recheio.</h2>
+      <p class="lead">A uaice fit é a linha de picolés fit recheados da uaice cream: 60 g, base de iogurte proteico e recheio cremoso, sem adição de açúcar. O doce que fica na rotina de quem passou a comer menos.</p>
+      <div class="specs">
+        <div class="spec"><b>60 g</b><span>porção individual controlada</span></div>
+        <div class="spec"><b>~8 g</b><span>de proteína por unidade</span></div>
+        <div class="spec"><b>~3 g</b><span>de fibras</span></div>
+        <div class="spec"><b>até 120</b><span>kcal por unidade</span></div>
+      </div>
+      <p class="note">Metas de desenvolvimento, que dependem de testes de formulação e validação nutricional. Alegações no rótulo seguem a RDC nº 429/2020 e a IN nº 75/2020 da Anvisa.</p>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <span class="dot" style="width:90px;height:90px;right:-20px;top:40px;background:var(--morango)"></span>
+      <span class="dot" style="width:34px;height:34px;right:70px;top:150px;background:var(--cream)"></span>
+      <span class="dot" style="width:150px;height:150px;left:-50px;bottom:-40px;background:var(--menta)"></span>
+      <div class="tag">Doce de leite mineiro<small>o carro-chefe da linha</small></div>
+      <div class="big" id="heroPop"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCADO -->
+<section class="block" id="mercado">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">1 · Análise situacional</span>
+      <h2>As pessoas estão comendo menos doce</h2>
+      <p>Com a popularização das canetas emagrecedoras, muita gente cortou doces e passou a buscar proteína. A uaice cream quer ser o doce que essa pessoa mantém no dia.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>33%</b><p>dos domicílios brasileiros tinham, em fevereiro de 2026, alguém que usa ou já usou canetas emagrecedoras (eram 26% no fim de 2025).</p></div>
+      <div class="stat"><b>70%</b><p>desses domicílios diminuíram o consumo de doces, snacks e salgadinhos.</p></div>
+      <div class="stat"><b>+9,1%</b><p>de alta projetada no volume de suplementos proteicos, enquanto chocolates, biscoitos e balas caem.</p></div>
+    </div>
+    <p class="quote">Quem come menos precisa que cada porção traga mais nutrientes. A uaice cream leva isso para a sobremesa.</p>
+    <p class="src">Fontes: Instituto Locomotiva/ICTQ (Andrade, 2026); Scanntech/SuperVarejo (2026); Mozaffarian et al. (2025).</p>
+  </div>
+</section>
+
+<!-- CONCORRÊNCIA + SWOT -->
+<section class="block alt" id="concorrencia">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">Concorrência e SWOT</span>
+      <h2>O sabor do artesanal com a proteína do fitness</h2>
+    </div>
+    <div class="two">
+      <div class="panel" style="background:var(--bg)">
+        <h3>O que já existe</h3>
+        <p>Picolés e potes de sorvete proteico já estão no mercado, como o Piracanjuba ProForce (2026), cuja distribuição inicial não inclui o Triângulo Mineiro.</p>
+        <p>Na avaliação do grupo, esses produtos têm visual de suplemento, e o pote facilita comer mais de uma porção. Já o picolé de sorveteria tradicional não tem a proteína como proposta.</p>
+      </div>
+      <div class="panel" style="background:var(--menta);color:var(--choco)">
+        <h3>Onde a uaice entra</h3>
+        <p style="color:var(--choco)">Junta o sabor e o recheio do picolé artesanal com a proteína e o pouco açúcar dos produtos fitness, em porção única e com sabores mineiros.</p>
+      </div>
+    </div>
+    <div class="swot">
+      <div class="sw" style="background:var(--tint)"><h3 style="color:var(--tint-ink)">Forças</h3><ul><li>Porção individual pequena e controlada</li><li>Recheio cremoso, diferente dos picolés proteicos comuns</li><li>Identidade mineira e sabores regionais</li><li>Venda em lojas que já atendem o público fit</li></ul></div>
+      <div class="sw" style="background:var(--bg)"><h3>Fraquezas</h3><ul><li>Marca nova e desconhecida</li><li>Custo maior de ingredientes proteicos</li><li>Dependência da cadeia de frio no transporte e nas lojas</li><li>Volume de produção inicial pequeno</li></ul></div>
+      <div class="sw" style="background:var(--caramelo);color:var(--choco)"><h3>Oportunidades</h3><ul><li>Crescimento do uso de canetas emagrecedoras</li><li>Alta na procura por produtos proteicos</li><li>Lojas de nicho buscando produtos diferentes para o freezer</li><li>Poucas marcas regionais no segmento</li></ul></div>
+      <div class="sw" style="background:var(--bg)"><h3>Ameaças</h3><ul><li>Queda geral no consumo de doces</li><li>Grandes marcas lançando picolés proteicos</li><li>Variação de preço do leite e das proteínas</li><li>Regras da Anvisa para alegações nutricionais</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- PÚBLICO -->
+<section class="block" id="publico">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">Público-alvo</span>
+      <h2>Para quem está se cuidando e não quer largar o doce</h2>
+    </div>
+    <div class="persona">
+      <div class="panel">
+        <h3>Adultos de 25 a 50 anos</h3>
+        <p>Classes B- e C+, moradores das cidades-polo do Triângulo Mineiro, que estão emagrecendo com canetas, dieta ou academia e se preocupam com a aparência e a saúde.</p>
+        <p>Compram em lojas de produtos naturais e de suplementos, frequentam academias e cafeterias saudáveis e trocaram os doces comuns por opções mais leves e com proteína.</p>
+      </div>
+      <div class="when">
+        <div><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="11"/><path d="M16 10v6l4 3"/></svg><span><b>No meio da tarde</b>o lanche que segura até o jantar</span></div>
+        <div><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 16h4v-5h4v10H9v-5M27 16h-4v-5h-4v10h4v-5M13 16h6"/></svg><span><b>Depois do treino</b>proteína gelada, sem cara de suplemento</span></div>
+        <div><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 14h20M8 14a8 8 0 0 0 16 0M16 6v3"/></svg><span><b>Sobremesa do almoço</b>doce na medida certa</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section class="block alt" id="catalogo">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">Catálogo · demonstração</span>
+      <h2>Escolhe o seu, sô!</h2>
+      <p>Nove sabores, todos com recheio cremoso por dentro. Adicione ao carrinho para simular um pedido; nada é cobrado.</p>
+    </div>
+    <div class="zero-band">
+      <div>
+        <div class="collab"><span class="u"><b>uai</b>ce</span><span class="p">fit</span><span>×</span><span>Coca-Cola Zero</span></div>
+        <p>Edição especial: o clássico virou picolé, com sabor de Coca-Cola Zero e zero açúcar.</p>
+      </div>
+      <button class="btn zero" type="button" data-filter-btn="cola">Ver o sabor Zero</button>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar sabores" id="filters"></div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+    <div class="cart-bar"><button class="btn primary" type="button" data-open-cart>Ver carrinho <span class="count" data-count>0</span></button></div>
+  </div>
+</section>
+
+<!-- OBJETIVOS + 4Ps -->
+<section class="block" id="planejamento">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">2 e 3 · Objetivos e estratégias</span>
+      <h2>Metas para os primeiros seis meses</h2>
+    </div>
+    <div class="goals">
+      <div class="goal"><small>Objetivo 1 · colocar a marca nas lojas de nicho</small><b>30</b><p>pontos de venda ativos no Triângulo Mineiro até o fim do sexto mês.</p></div>
+      <div class="goal"><small>Objetivo 2 · conquistar o consumidor</small><b>9.000</b><p>unidades vendidas nos primeiros seis meses.</p></div>
+    </div>
+    <div class="ps">
+      <div class="pcard" style="background:var(--morango);color:var(--choco)"><h3>Produto</h3><p>Porção pequena, proteína e recheio, com sabores mineiros e sabores que o público já conhece.</p></div>
+      <div class="pcard" style="background:var(--caramelo);color:var(--choco)"><h3>Preço</h3><p>Valor percebido: acima do picolé comum, por ser um produto diferenciado.</p></div>
+      <div class="pcard" style="background:var(--menta);color:var(--choco)"><h3>Praça</h3><p>Distribuição seletiva em lojas de nicho, sem loja própria, com freezer em comodato.</p></div>
+      <div class="pcard" style="background:var(--choco);color:var(--cream)"><h3>Promoção</h3><p>Redes sociais focadas no recheio e na porção certa, com degustação nos pontos de venda.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREÇO + LOGÍSTICA -->
+<section class="block alt" id="logistica">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">4 · Planos de ação</span>
+      <h2>Preço e como o picolé chega ao freezer</h2>
+      <p>A uaice cream fabrica e fornece para lojas de produtos naturais, de suplementos, empórios saudáveis, cafeterias e academias.</p>
+    </div>
+    <div class="pricing">
+      <div><b>R$ 10,90</b><span>preço sugerido ao consumidor (60 g)</span></div>
+      <div><b>R$ 6,90</b><span>preço de venda ao lojista</span></div>
+      <div><b>R$ 4,00</b><span>de margem por unidade para o lojista</span></div>
+    </div>
+    <h3 style="font-size:28px;margin:48px 0 20px;font-weight:700">Expansão no Triângulo Mineiro</h3>
+    <div class="route">
+      <div class="stop"><div class="bullet">1</div><h3>Mês 1</h3><p>Lançamento em Uberaba e Uberlândia, com degustação em cada ponto de venda.</p></div>
+      <div class="stop"><div class="bullet">2</div><h3>Meses 2 e 3</h3><p>Novos pontos nas duas cidades e ajuste da promoção pelos resultados.</p></div>
+      <div class="stop"><div class="bullet">3</div><h3>Mês 4</h3><p>Expansão para Araguari e Ituiutaba.</p></div>
+      <div class="stop"><div class="bullet">4</div><h3>Depois do semestre</h3><p>Outras regiões de Minas Gerais.</p></div>
+    </div>
+    <div class="flow">
+      <div><b>Freezer em comodato</b><span>Cada loja recebe um freezer pequeno com a identidade da marca, que conserva o produto e chama a atenção no balcão.</span></div>
+      <div><b>Reposição pelo WhatsApp</b><span>Os lojistas fazem pedidos de reposição pelo WhatsApp Business.</span></div>
+      <div><b>Entrega semanal refrigerada</b><span>Rota semanal em veículo refrigerado. O primeiro lote vai em consignação: o lojista paga só o que vender.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIMENTO -->
+<section class="block" id="investimento">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">Investimento inicial</span>
+      <h2>Quanto custa começar</h2>
+      <p>Estimativa do grupo para o primeiro semestre, com valores aproximados de mercado. Serve para este exercício e não é um cálculo contábil definitivo.</p>
+    </div>
+    <div class="invest">
+      <div class="bars" id="bars"></div>
+      <div class="sum">
+        <div><small>Investimento inicial estimado</small><b id="investTotal">R$ 0</b><p>Equipamentos, freezers, transporte, legalização e capital de giro para os seis meses.</p></div>
+        <div><small>Receita estimada no semestre</small><b>R$ 62.100</b><p>9.000 unidades × R$ 6,90 vendidos ao lojista.</p></div>
+        <div><small>Margem bruta estimada</small><b>R$ 33.300</b><p>Considerando custo de produção de cerca de R$ 3,20 por unidade.</p></div>
+        <div><p>Freezers, máquinas e equipamentos ficam com a empresa: o retorno do investimento vem com a expansão depois do primeiro semestre.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMOÇÃO -->
+<section class="block alt" id="promocao">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">Promoção</span>
+      <h2>Dá pra comer menos e continuar comendo doce</h2>
+      <p>A comunicação não promete emagrecimento nem cita medicamentos: a Anvisa proíbe propriedades medicinais no rótulo de alimentos, e o picolé também é para quem não está de dieta.</p>
+    </div>
+    <div class="posts">
+      <div class="post">
+        <div class="img" style="background:var(--caramelo)" id="post1"></div>
+        <div class="cap"><b>Publicação 1 · apresentação</b><p>“Chegou o picolé que mineiro entende: doce de leite mineiro, 8 g de proteína e só 60 g. Encontre no freezer da sua loja natural favorita.”</p></div>
+      </div>
+      <div class="post">
+        <div class="img" style="background:var(--menta)" id="post2"></div>
+        <div class="cap"><b>Publicação 2 · diferencial</b><p>“Comendo menos? Então coma melhor. uaice fit tem porção certa, proteína e recheio de verdade.”</p></div>
+      </div>
+    </div>
+    <div class="two" style="margin-top:24px">
+      <div class="panel" style="background:var(--bg)">
+        <h3>Canais</h3>
+        <p>Instagram, visual e muito usado pelo público fitness e pelas lojas; TikTok, com vídeos curtos do picolé sendo mordido e o recheio aparecendo; WhatsApp Business, para o relacionamento com os lojistas.</p>
+        <div class="channels"><span class="badge b-mineiro">Instagram</span><span class="badge b-chefe">TikTok</span><span class="badge b-vegano">WhatsApp Business</span></div>
+      </div>
+      <div class="panel" style="background:var(--bg)">
+        <h3>Degustação no primeiro mês</h3>
+        <p>Cada ponto de venda faz uma tarde de degustação com picolés em pedaços. Quem experimenta ganha um cupom para levar o primeiro picolé por R$ 6,90.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONITORAMENTO -->
+<section class="block" id="monitoramento">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="step">5 · Monitoramento e controle</span>
+      <h2>Como o grupo acompanha os resultados</h2>
+    </div>
+    <div class="scroll">
+      <table class="tbl">
+        <thead><tr><th>Indicador</th><th>Como medir</th><th>Frequência</th><th>Meta</th></tr></thead>
+        <tbody>
+          <tr><td>Unidades vendidas</td><td>Pedidos de reposição de cada ponto de venda</td><td>Semanal</td><td>9.000 unidades em seis meses</td></tr>
+          <tr><td>Pontos de venda ativos</td><td>Lojas com pedido nos últimos 30 dias</td><td>Mensal</td><td>30 pontos até o sexto mês</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="two" style="margin-top:24px">
+      <div class="panel"><h3>Loja parada</h3><p>Duas semanas sem reposição: a equipe visita o ponto para entender o motivo e, se precisar, repete a degustação.</p></div>
+      <div class="panel"><h3>Vendas abaixo da meta</h3><p>Abaixo de 70% da meta no terceiro mês: a promoção é reforçada antes da expansão para novas cidades.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENCERRAMENTO -->
+<section class="end" id="grupo">
+  <div class="wrap">
+    <p class="meta">Trabalho de marketing · Universidade de Uberaba · Uberaba, 2026</p>
+    <div class="bigname" role="heading" aria-level="2" aria-label="uaice cream"><span><b>uai</b><span class="ce">ce</span></span><span class="p">cream</span></div>
+    <p class="quote">As pessoas estão comendo menos, e muitas ainda querem um doce no dia. A uaice cream entrega esse doce: pequeno, com proteína e cheio de recheio, nas lojas que esse público já frequenta.</p>
+    <div class="team" id="teamEnd"></div>
+    <div class="refs">
+      <h3>Referências</h3>
+      <ol>
+        <li>ANDRADE, Marcus Vinicius. Canetas emagrecedoras já foram usadas em 33% dos domicílios brasileiros, aponta pesquisa. ICTQ, 9 jul. 2026. <a href="https://ictq.com.br/farmacia-clinica/5321-canetas-emagrecedoras-ja-foram-usadas-em-33-dos-domicilios-brasileiros-aponta-pesquisa" target="_blank" rel="noopener">ictq.com.br</a>. Acesso em: 11 nov. 2026.</li>
+        <li>BRASIL. Anvisa. Resolução RDC nº 429, de 8 de outubro de 2020. Rotulagem nutricional dos alimentos embalados. Brasília, DF, 2020a.</li>
+        <li>BRASIL. Anvisa. Instrução Normativa IN nº 75, de 8 de outubro de 2020. Requisitos técnicos para declaração da rotulagem nutricional. Brasília, DF, 2020b.</li>
+        <li>BRASIL. Anvisa. Resolução RDC nº 727, de 1º de julho de 2022. Rotulagem dos alimentos embalados. Brasília, DF, 2022.</li>
+        <li>CANETAS emagrecedoras crescem 239% no Brasil e já transformam o carrinho do consumidor. SuperVarejo, 25 jun. 2026. <a href="https://supervarejo.com.br/varejo/canetas-emagrecedoras-crescem-239-no-brasil-e-ja-transformam-o-carrinho-do-consumidor" target="_blank" rel="noopener">supervarejo.com.br</a>. Acesso em: 11 nov. 2026.</li>
+        <li>MOZAFFARIAN, Dariush et al. Nutritional priorities to support GLP-1 therapy for obesity. The American Journal of Clinical Nutrition, v. 122, n. 1, p. 344-367, 2025.</li>
+        <li>PIRACANJUBA estreia em gelados proteicos com picolé zero açúcar e zero lactose. Nosso Meio, 30 mar. 2026. <a href="https://nossomeio.com.br/piracanjuba-estreia-em-gelados-proteicos-com-picole-zero-acucar-e-zero-lactose/" target="_blank" rel="noopener">nossomeio.com.br</a>. Acesso em: 11 nov. 2026.</li>
+      </ol>
+      <p style="color:#E9D3BF;font-size:13px;margin-top:20px">uaice cream é uma marca fictícia criada para este trabalho. A parceria com a Coca-Cola é fictícia.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Carrinho" aria-hidden="true">
+  <div class="dh">
+    <h2>Seu pedido</h2>
+    <button class="icon-btn" type="button" id="cartClose" aria-label="Fechar carrinho">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div class="lines" id="lines"></div>
+  <div class="total" id="totalBox">
+    <div class="row"><span>Total</span><span class="price" id="total">R$ 0,00</span></div>
+    <button class="btn primary" type="button" id="checkout">Finalizar pedido</button>
+    <p class="note">Demonstração: nada é cobrado.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const TEAM = [
+  {name:'Gabriel Gonçalves Mascarenhas', role:'Líder', ra:'5167587', c:['var(--morango-700)','var(--white)']},
+  {name:'Ramon Carvalho Querino', role:'Design', ra:'5165275', c:['var(--menta)','var(--choco)']},
+  {name:'Ezequias Moura Cardoso', role:'Idealizador criativo', ra:'5166309', c:['var(--caramelo)','var(--choco)']},
+  {name:'Yuri Gustavo Cruz Alves da Silva', role:'Controle de qualidade de ideias e direcionamento', ra:'5167014', c:['var(--choco)','var(--cream)']}
+];
+const teamHtml = (end) => TEAM.map(m => `<div class="member"><span class="role" style="background:${end&&m.c[0]==='var(--choco)'?'var(--cream)':m.c[0]};color:${end&&m.c[0]==='var(--choco)'?'var(--choco)':m.c[1]}">${m.role}</span><h3>${m.name}</h3><p>RA ${m.ra}</p></div>`).join('');
+document.getElementById('teamTop').innerHTML = teamHtml(false);
+document.getElementById('teamEnd').innerHTML = teamHtml(true);
+
+const C = {choco:'#4A2418',morango:'#E8457A',menta:'#3FB58A',caramelo:'#F2B35B',cola:'#C41E2D',cream2:'#F6E6D2'};
+const P = 10.9;
+const PRODUCTS = [
+  {id:'doce-de-leite', name:'Doce de leite mineiro', desc:'Casquinha de iogurte proteico com recheio cremoso de doce de leite mineiro, sem adição de açúcar. O recheio aparece logo na primeira mordida.', bg:C.caramelo, body:'#FFF1D6', fill:'#C98A4B', tags:['chefe','mineiro','proteico'], chefe:true},
+  {id:'romeu-julieta', name:'Romeu e Julieta', desc:'Iogurte com queijo minas e recheio cremoso de goiabada.', bg:C.morango, body:'#FFF1D6', fill:'#9E1B32', tags:['mineiro','proteico']},
+  {id:'choco-pro', name:'Chocolate proteico', desc:'Cacau intenso com recheio cremoso de chocolate.', bg:C.choco, body:'#6B3A2A', fill:'#2E140B', tags:['proteico']},
+  {id:'morango-pro', name:'Morango proteico', desc:'Morango de verdade com recheio cremoso da fruta.', bg:C.morango, body:'#F7A7C0', fill:'#C42D5E', tags:['proteico']},
+  {id:'coco-pro', name:'Coco proteico', desc:'Coco cremoso por fora e por dentro.', bg:C.cream2, body:'#FFFFFF', fill:'#E3CFB4', tags:['proteico']},
+  {id:'zero', name:'Coca-Cola Zero', desc:'O clássico gelado no palito, com recheio cremoso. Zero açúcar.', bg:C.cola, body:'#2A1410', fill:'#C41E2D', tags:['cola','zero'], dark:true},
+  {id:'limao', name:'Limão com hortelã', desc:'Cítrico e refrescante, com recheio cremoso de limão.', bg:C.menta, body:'#E8F7C8', fill:'#7CC46A', tags:['zero']},
+  {id:'maracuja', name:'Maracujá', desc:'Azedinho na medida, com recheio cremoso de maracujá.', bg:C.caramelo, body:'#FFE58A', fill:'#E3A51C', tags:['zero']},
+  {id:'morango-iog', name:'Morango com iogurte', desc:'Iogurte natural com recheio cremoso de morango.', bg:C.morango, body:'#FFE3EC', fill:'#E8457A', tags:['zero']}
+];
+const TAGS = {chefe:['Carro-chefe','b-chefe'], mineiro:['Mineiro','b-mineiro'], proteico:['Proteico','b-proteico'], zero:['Sem adição de açúcar','b-zero'], cola:['Parceria Coca-Cola','b-cola']};
+const FILTERS = [['todos','Todos'],['mineiro','Mineiros'],['proteico','Proteicos'],['zero','Sem adição de açúcar'],['cola','Coca-Cola Zero']];
+
+let uid = 0;
+function pop(p, label, cut){
+  const id = 'c' + (uid++);
+  const body = 'M30 52 C30 24 44 10 60 10 C76 10 90 24 90 52 L90 118 C90 124 86 128 80 128 L40 128 C34 128 30 124 30 118 Z';
+  const filling = cut
+    ? `<g clip-path="url(#${id})"><path d="M48 36 C48 28 54 24 60 24 C66 24 72 28 72 36 L72 108 C72 112 68 114 60 114 C52 114 48 112 48 108 Z" fill="${p.fill}"/></g>`
+    : `<g clip-path="url(#${id})"><path d="M20 10 H100 V36 C96 36 94 44 90 44 C86 44 86 54 80 54 C74 54 74 40 68 40 C62 40 62 50 56 50 C50 50 50 38 44 38 C38 38 38 46 32 46 C26 46 24 36 20 36 Z" fill="${p.fill}"/></g>`;
+  return `<svg viewBox="0 0 120 180" ${label?`role="img" aria-label="${label}"`:'aria-hidden="true"'}>
+    <defs><clipPath id="${id}"><path d="${body}"/></clipPath></defs>
+    <rect x="52" y="122" width="16" height="56" rx="8" fill="#F2B35B" stroke="#4A2418" stroke-width="3"/>
+    <path d="${body}" fill="${p.body}"/>${filling}
+    <path d="${body}" fill="none" stroke="#4A2418" stroke-width="3.5" stroke-linejoin="round"/>
+    <rect x="36" y="30" width="7" height="30" rx="3.5" fill="#FFFFFF" opacity=".45"/>
+  </svg>`;
+}
+const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const byId = id => PRODUCTS.find(p => p.id === id);
+const tagHtml = t => `<span class="badge ${TAGS[t][1]}">${TAGS[t][0]}</span>`;
+
+document.getElementById('heroPop').innerHTML = pop(byId('doce-de-leite'), null, true);
+document.getElementById('post1').innerHTML = pop(byId('doce-de-leite'), null, true);
+document.getElementById('post2').innerHTML = pop(byId('morango-pro')) + pop(byId('limao'));
+
+/* investimento */
+const INVEST = [
+  ['Freezers em comodato','30 × R$ 1.900, comprados aos poucos até o sexto mês',57000],
+  ['Equipamentos de produção','Picoleteira semi-industrial, formas e seladora',28000],
+  ['Transporte refrigerado','Aluguel de utilitário refrigerado: 6 × R$ 3.500',21000],
+  ['Capital de giro','Cobre o primeiro lote em consignação',15000],
+  ['Divulgação e degustações','Redes sociais e tardes de degustação no semestre',9000],
+  ['Legalização e análises','Licenças sanitárias, análises nutricionais e rotulagem',8000],
+  ['Estoque frio','Dois freezers horizontais para estocagem',7000],
+  ['Embalagens e identidade','Primeiro lote de embalagens e adesivos dos freezers',6000],
+  ['Ingredientes do primeiro lote','1.500 unidades × cerca de R$ 3,20',4800]
+];
+const max = Math.max(...INVEST.map(i=>i[2]));
+const tot = INVEST.reduce((s,i)=>s+i[2],0);
+const brl0 = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+document.getElementById('bars').innerHTML = INVEST.map(([n,d,v],i) => `
+  <div class="bar"><div class="lbl"><span>${n}</span><span>${brl0(v)}</span></div>
+  <div class="track"><div class="fill" style="width:${(v/max*100).toFixed(1)}%;background:${['var(--morango)','var(--menta)','var(--caramelo)'][i%3]}"></div></div>
+  <small>${d}</small></div>`).join('');
+document.getElementById('investTotal').textContent = brl0(tot);
+
+/* catálogo */
+let filter = 'todos';
+const grid = document.getElementById('grid'), filtersEl = document.getElementById('filters');
+function renderFilters(){ filtersEl.innerHTML = FILTERS.map(([k,l]) => `<button class="chip" type="button" aria-pressed="${k===filter}" data-f="${k}">${l}</button>`).join(''); }
+function renderGrid(){
+  const list = PRODUCTS.filter(p => filter==='todos' || p.tags.includes(filter));
+  grid.innerHTML = list.length ? list.map(p => `
+    <article class="card${p.dark?' dark':''}${p.chefe&&filter==='todos'?' chefe':''}">
+      <div class="media" style="background:${p.bg}">${pop(p, 'Picolé ' + p.name, p.chefe)}</div>
+      <div class="body">
+        <div class="info">
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <div class="tags">${p.tags.map(tagHtml).join('')}</div>
+        </div>
+        <div class="foot">
+          <span class="price">${brl(P)}</span>
+          <button class="btn sm ${p.dark?'zero':'primary'}" type="button" data-add="${p.id}" aria-label="Adicionar ${p.name}">Adicionar</button>
+        </div>
+      </div>
+    </article>`).join('') : `<div class="empty">Nenhum sabor nesse filtro.</div>`;
+}
+function setFilter(f){ filter=f; renderFilters(); renderGrid(); }
+filtersEl.addEventListener('click', e => { const b=e.target.closest('[data-f]'); if(b) setFilter(b.dataset.f); });
+renderFilters(); renderGrid();
+
+/* carrinho */
+const cart = new Map();
+const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+const lines = document.getElementById('lines'), totalBox = document.getElementById('totalBox');
+let lastFocus = null;
+const count = () => { let n=0; cart.forEach(q=>n+=q); return n; };
+function renderCart(){
+  document.querySelectorAll('[data-count]').forEach(el => el.textContent = count());
+  let total = 0;
+  if (!cart.size){
+    lines.innerHTML = `<div class="done"><h3>Seu carrinho está vazio</h3><p>Escolhe um sabor no catálogo e ele aparece aqui.</p><button class="btn secondary sm" type="button" data-go-cat>Ver sabores</button></div>`;
+    totalBox.hidden = true;
+  } else {
+    totalBox.hidden = false;
+    lines.innerHTML = [...cart].map(([id,q]) => { const p=byId(id); total+=P*q; return `
+      <div class="line">
+        <div class="sw2" style="background:${p.bg}">${pop(p)}</div>
+        <div><b>${p.name}</b><small>${brl(P)} cada</small></div>
+        <div class="qty"><button type="button" data-dec="${id}" aria-label="Tirar um ${p.name}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Mais um ${p.name}">+</button></div>
+      </div>`; }).join('');
+  }
+  document.getElementById('total').textContent = brl(total);
+}
+function openCart(){ lastFocus=document.activeElement; drawer.classList.add('open'); scrim.classList.add('open'); drawer.setAttribute('aria-hidden','false'); document.getElementById('cartClose').focus(); }
+function closeCart(){ drawer.classList.remove('open'); scrim.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); if(lastFocus) lastFocus.focus(); }
+let tt;
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),1800); }
+
+document.addEventListener('click', e => {
+  const add = e.target.closest('[data-add]');
+  if (add){ const id=add.dataset.add; cart.set(id,(cart.get(id)||0)+1); renderCart(); toast(`${byId(id).name} no carrinho`); return; }
+  const inc = e.target.closest('[data-inc]'); if (inc){ cart.set(inc.dataset.inc, cart.get(inc.dataset.inc)+1); renderCart(); return; }
+  const dec = e.target.closest('[data-dec]'); if (dec){ const id=dec.dataset.dec, q=cart.get(id)-1; q>0?cart.set(id,q):cart.delete(id); renderCart(); return; }
+  if (e.target.closest('[data-open-cart]')){ openCart(); return; }
+  if (e.target.closest('[data-go-cat]')){ closeCart(); document.getElementById('catalogo').scrollIntoView(); return; }
+  const fb = e.target.closest('[data-filter-btn]'); if (fb){ setFilter(fb.dataset.filterBtn); document.getElementById('filters').scrollIntoView(); }
+});
+document.getElementById('cartClose').addEventListener('click', closeCart);
+scrim.addEventListener('click', closeCart);
+document.addEventListener('keydown', e => { if (e.key==='Escape' && drawer.classList.contains('open')) closeCart(); });
+document.getElementById('checkout').addEventListener('click', () => {
+  const n = count(); cart.clear(); renderCart();
+  lines.innerHTML = `<div class="done"><div style="width:90px;margin:0 auto">${pop(byId('doce-de-leite'),null,true)}</div><h3>Pedido enviado!</h3><p>${n} ${n>1?'picolés':'picolé'} a caminho, uai. Isto é uma demonstração: nada foi cobrado.</p><button class="btn secondary sm" type="button" data-go-cat>Pedir de novo</button></div>`;
+});
+renderCart();
+</script>
+</body>
+</html>
