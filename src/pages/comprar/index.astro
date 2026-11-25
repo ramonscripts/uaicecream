@@ -1,28 +1,35 @@
 ---
-// Loja: lista os sabores e leva para a página de compra de cada um.
+// Loja para lojistas: condições de venda e os sabores, vendidos em caixas fechadas.
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
 import Hero from '../../components/Hero.astro';
 import Media from '../../components/Media.astro';
 import Tag from '../../components/Tag.astro';
 import Button from '../../components/Button.astro';
-import { sabores, PRICE, brl } from '../../data/site.js';
+import Cols from '../../components/Cols.astro';
+import { sabores, PRICE, SUGERIDO, CAIXA, PRICE_CAIXA, MINIMO, brl } from '../../data/site.js';
 ---
-<Base title="loja · uaice fit">
+<Base title="loja para lojistas · uaice fit" description="Compra da uaice fit para lojas de produtos naturais, suplementos, empórios, cafeterias e academias de Uberaba e Uberlândia.">
   <Section>
-    <Hero title="escolha seu sabor" lead="Seis sabores de 60 g, todos com recheio cremoso. Se não souber por onde começar, vá de Romeu e Julieta, o carro-chefe. Esta loja é uma demonstração e não cobra nada." />
-    <div class="site-grid">
+    <Hero title="loja para lojistas" lead="Compra da uaice fit para lojas de produtos naturais, suplementos, empórios, cafeterias e academias de Uberaba e Uberlândia. Esta loja é uma demonstração e não cobra nada." />
+    <Cols cards items={[
+      [brl(PRICE), `por unidade para a loja. Preço sugerido de revenda: ${brl(SUGERIDO)}.`],
+      [`${CAIXA} unidades`, `por caixa, todas do mesmo sabor. A caixa sai por ${brl(PRICE_CAIXA)}.`],
+      [`${MINIMO} caixas`, "de pedido mínimo, com sabores iguais ou diferentes."],
+      ["freezer emprestado", "para quem vende a uaice fit, com entrega semanal em veículo refrigerado."],
+    ]} />
+    <div class="site-grid site-grid--shop">
       {sabores.map((s) => (
         <article class="product" id={s.id}>
           <div class="ds-card">
-            <a href={`/comprar/${s.id}`} tabindex="-1" aria-hidden="true" class="product-media"><Media image={s.image} alt="" /></a>
-            {s.tags.length > 0 && <div class="product-tags">{s.tags.map((t) => <Tag>{t}</Tag>)}</div>}
+            <a href={`/comprar/${s.id}`} tabindex="-1" aria-hidden="true" class="product-media"><Media image={`/img/sabores/${s.id}.jpg`} alt="" /></a>
+            {s.tags.length > 0 && <div class="product-tags">{s.tags.map((t) => <Tag tone="emerald">{t}</Tag>)}</div>}
             <h2 class="t-heading-sm">{s.name}</h2>
             <p class="t-small">{s.desc}</p>
             <a class="ds-link ds-link--light t-caption" href={`/sabores/${s.id}`}>ver detalhes</a>
             <div class="product-foot">
-              <span class="t-body-strong">{brl(PRICE)}</span>
-              <Button variant="secondary" href={`/comprar/${s.id}`} aria-label={`comprar ${s.name}`}>comprar</Button>
+              <span class="product-price"><span class="t-body-strong">{brl(PRICE_CAIXA)}</span> <span class="t-caption">caixa com {CAIXA}</span></span>
+              <Button variant="secondary" href={`/comprar/${s.id}`} aria-label={`pedir ${s.name}`}>pedir</Button>
             </div>
           </div>
         </article>

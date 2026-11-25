@@ -3,19 +3,22 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import Hero from '../components/Hero.astro';
 import Button from '../components/Button.astro';
+import { CAIXA, MINIMO } from '../data/site.js';
 ---
-<Base title="carrinho · uaice fit">
+<Base title="pedido · uaice fit">
   <Section>
-    <Hero title="seu carrinho" />
+    <Hero title="seu pedido" lead={`Caixas com ${CAIXA} unidades de 60 g. Pedido mínimo de ${MINIMO} caixas, que podem ser de sabores diferentes.`} />
     <div class="shop">
-      <div class="stack-sm" id="cart-lines"></div>
+      <div class="stack-sm" id="cart-lines" tabindex="-1"></div>
       <aside class="order" id="cart-summary" aria-label="resumo do pedido" hidden>
         <div class="ds-card">
           <h2 class="t-heading-sm">resumo</h2>
-          <div class="order-total"><span class="t-small">itens</span><span class="t-body-strong" id="cart-count">0</span></div>
+          <div class="order-total"><span class="t-small">caixas</span><span class="t-body-strong" id="cart-count">0</span></div>
+          <div class="order-total"><span class="t-small">unidades</span><span class="t-body-strong" id="cart-units">0</span></div>
           <div class="order-total"><span class="t-body-strong">total</span><span class="t-heading-sm" id="cart-total"></span></div>
-          <Button href="/checkout">finalizar compra</Button>
-          <a class="ds-link ds-link--light t-body-strong" href="/comprar">continuar comprando</a>
+          <p class="t-small" id="cart-min" role="status"></p>
+          <Button href="/checkout" id="cart-go">finalizar pedido</Button>
+          <a class="ds-link ds-link--light t-body-strong" href="/comprar">adicionar outros sabores</a>
         </div>
       </aside>
     </div>
@@ -23,8 +26,8 @@ import Button from '../components/Button.astro';
 </Base>
 
 <script>
-  import { lines, setQty, count, total, MAX } from '../scripts/cart.js';
-  import { PRICE, brl } from '../data/site.js';
+  import { lines, setQty, count, units, missing, total, MAX } from '../scripts/cart.js';
+  import { PRICE_CAIXA, brl } from '../data/site.js';
 
   const list = document.getElementById('cart-lines');
   const summary = document.getElementById('cart-summary');
@@ -43,7 +46,7 @@ import Button from '../components/Button.astro';
     if (!items.length) {
       const card = el('div', 'ds-card cart-empty');
       const go = el('a', 'ds-btn ds-btn--secondary', 'ver a loja'); go.href = '/comprar';
-      card.append(el('p', 't-heading-sm', 'seu carrinho está vazio'), el('p', 't-small', 'Escolha um sabor na loja para começar.'), go);
+      card.append(el('p', 't-heading-sm', 'seu pedido está vazio'), el('p', 't-small', 'Escolha os sabores na loja para começar.'), go);
       list.append(card);
       return;
     }
@@ -51,13 +54,13 @@ import Button from '../components/Button.astro';
       const card = el('article', 'ds-card cart-line');
       const info = el('div', 'stack-sm cart-info');
       const name = el('a', 'ds-link ds-link--light t-heading-sm', it.name); name.href = `/comprar/${it.id}`;
-      info.append(name, el('span', 't-small', `${brl(PRICE)} cada`));
+      info.append(name, el('span', 't-small', `${brl(PRICE_CAIXA)} a caixa · ${it.units} unidades`));
       const qty = el('div', 'qty');
       qty.setAttribute('role', 'group'); qty.setAttribute('aria-label', `quantidade de ${it.name}`);
       qty.append(
-        textBtn('−', `menos um ${it.name}`, { id: it.id, q: String(it.q - 1) }),
+        textBtn('−', `menos uma caixa de ${it.name}`, { id: it.id, q: String(it.q - 1) }),
         el('span', 't-body-strong', String(it.q)),
-        textBtn('+', `mais um ${it.name}`, { id: it.id, q: String(Math.min(MAX, it.q + 1)) }),
+        textBtn('+', `mais uma caixa de ${it.name}`, { id: it.id, q: String(Math.min(MAX, it.q + 1)) }),
       );
       const end = el('div', 'cart-end');
       end.append(el('span', 't-body-strong', brl(it.subtotal)), textBtn('remover', `remover ${it.name}`, { id: it.id, q: '0' }));
@@ -65,12 +68,22 @@ import Button from '../components/Button.astro';
       list.append(card);
     }
     document.getElementById('cart-count').textContent = String(count());
+    document.getElementById('cart-units').textContent = String(units());
+    // abaixo do pedido mínimo: esconde o botão e diz quantas caixas faltam
+    const falta = missing();
+    document.getElementById('cart-go').hidden = falta > 0;
+    document.getElementById('cart-min').textContent = falta > 0 ? `Faltam ${falta} ${falta > 1 ? 'caixas' : 'caixa'} para o pedido mínimo.` : '';
     document.getElementById('cart-total').textContent = brl(total());
   }
 
   list.addEventListener('click', (e) => {
     const b = e.target.closest('button[data-id]');
-    if (b) setQty(b.dataset.id, Number(b.dataset.q));
+    if (!b) return;
+    const label = b.getAttribute('aria-label');
+    setQty(b.dataset.id, Number(b.dataset.q)); // redesenha a lista e apaga o botão clicado
+    // devolve o foco ao botão equivalente; se o item saiu, ao começo da lista
+    const same = [...list.querySelectorAll('button[aria-label]')].find((x) => x.getAttribute('aria-label') === label);
+    (same || list).focus();
   });
   window.addEventListener('cart:change', render);
   window.addEventListener('storage', render);

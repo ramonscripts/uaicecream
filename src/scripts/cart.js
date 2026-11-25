@@ -1,8 +1,8 @@
-// Carrinho guardado no navegador (localStorage). Formato salvo: { [idDoSabor]: quantidade }.
+// Pedido do lojista guardado no navegador (localStorage). Formato salvo: { [idDoSabor]: caixas }.
 // Toda mudança dispara o evento 'cart:change' na janela.
-import { sabores, PRICE } from '../data/site.js';
+import { sabores, PRICE_CAIXA, CAIXA, MINIMO } from '../data/site.js';
 
-const KEY = 'uaice-cart';
+const KEY = 'uaice-pedido'; // chave nova: o carrinho antigo guardava unidades, não caixas
 const MAX = 99;
 
 export const byId = (id) => sabores.find((s) => s.id === id);
@@ -26,11 +26,14 @@ function write(cart) {
   window.dispatchEvent(new CustomEvent('cart:change'));
 }
 
+// devolve quantas caixas entraram de fato (pode ser menos que q por causa do teto MAX)
 export function add(id, q = 1) {
-  if (!byId(id)) return;
+  if (!byId(id)) return 0;
   const cart = read();
-  cart[id] = Math.min((cart[id] || 0) + q, MAX);
+  const antes = cart[id] || 0;
+  cart[id] = Math.min(antes + q, MAX);
   write(cart);
+  return cart[id] - antes;
 }
 
 export function setQty(id, q) {
@@ -42,9 +45,11 @@ export function setQty(id, q) {
 export function clear() { write({}); }
 
 export function lines() {
-  return Object.entries(read()).map(([id, q]) => ({ ...byId(id), q, subtotal: PRICE * q }));
+  return Object.entries(read()).map(([id, q]) => ({ ...byId(id), q, units: q * CAIXA, subtotal: PRICE_CAIXA * q }));
 }
 
-export const count = () => lines().reduce((n, l) => n + l.q, 0);
+export const count = () => lines().reduce((n, l) => n + l.q, 0); // caixas
+export const units = () => count() * CAIXA;
+export const missing = () => Math.max(0, MINIMO - count()); // caixas que faltam para o pedido mínimo
 export const total = () => lines().reduce((t, l) => t + l.subtotal, 0);
 export { MAX };

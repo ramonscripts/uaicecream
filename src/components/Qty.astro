@@ -1,10 +1,10 @@
 ---
 // Seletor de quantidade (− n +) com botões de texto do design system.
-// O script da página escuta [data-step] e atualiza [data-qty-value].
-const { name, value = 1 } = Astro.props;
+// O script da página escuta [data-step] e atualiza [data-qty-value]. unit: o que se conta (ex.: "caixa").
+const { name, value = 1, unit = 'unidade' } = Astro.props;
 ---
-<div class="qty" role="group" aria-label={`quantidade de ${name}`}>
-  <button class="ds-btn ds-btn--text ds-link ds-link--light" type="button" data-step="-1" aria-label={`menos um ${name}`}>−</button>
+<div class="qty" role="group" aria-label={`quantidade de ${name}, em ${unit}s`}>
+  <button class="ds-btn ds-btn--text ds-link ds-link--light" type="button" data-step="-1" aria-label={`menos uma ${unit} de ${name}`}>−</button>
   <span class="t-body-strong" data-qty-value aria-live="polite">{value}</span>
-  <button class="ds-btn ds-btn--text ds-link ds-link--light" type="button" data-step="1" aria-label={`mais um ${name}`}>+</button>
+  <button class="ds-btn ds-btn--text ds-link ds-link--light" type="button" data-step="1" aria-label={`mais uma ${unit} de ${name}`}>+</button>
 </div>

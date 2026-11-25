@@ -1,22 +1,35 @@
 ---
-// Compra simulada, sem conta: os dados do formulário não saem do navegador e não são salvos.
+// Fechamento do pedido do lojista (simulado): os dados do formulário não saem do navegador e não são salvos.
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import Hero from '../components/Hero.astro';
 import Input from '../components/Input.astro';
 import Button from '../components/Button.astro';
-import { cidades } from '../data/site.js';
+import { cidades, tiposDeLoja } from '../data/site.js';
 ---
-<Base title="finalizar compra · uaice fit">
+<Base title="finalizar pedido · uaice fit">
   <Section>
-    <Hero title="finalizar compra" lead="Sem cadastro: preencha a entrega e escolha como pagar. É uma compra simulada, nada é cobrado e seus dados não são enviados." />
+    <Hero title="finalizar pedido" lead="Preencha os dados da loja. A entrega é semanal, em veículo refrigerado. É um pedido simulado: nada é cobrado e os dados não são enviados." />
 
     <div class="shop" id="checkout">
       <form class="ds-card checkout-form" id="checkout-form" novalidate>
-        <h2 class="t-heading-sm">entrega</h2>
-        <Input label="nome completo" id="nome" name="nome" autocomplete="name" required />
+        <h2 class="t-heading-sm">dados da loja</h2>
+        <Input label="nome da loja" id="loja" name="loja" autocomplete="organization" required />
+        <Input label="CNPJ" id="cnpj" name="cnpj" autocapitalize="characters" spellcheck="false" placeholder="00.000.000/0000-00" maxlength="18" required />
+        <label class="ds-field" for="tipo">
+          <span class="ds-field__label">tipo de loja</span>
+          <select class="ds-input" id="tipo" name="tipo" required>
+            <option value="">escolha o tipo</option>
+            {tiposDeLoja.map((t) => <option>{t}</option>)}
+          </select>
+        </label>
+
+        <h2 class="t-heading-sm">responsável</h2>
+        <Input label="nome" id="nome" name="nome" autocomplete="name" required />
         <Input label="e-mail" id="email" name="email" type="email" autocomplete="email" required />
-        <Input label="telefone" id="telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required />
+        <Input label="WhatsApp" id="telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required />
+
+        <h2 class="t-heading-sm">entrega</h2>
         <label class="ds-field" for="cidade">
           <span class="ds-field__label">cidade</span>
           <select class="ds-input" id="cidade" name="cidade" required>
@@ -24,13 +37,18 @@ import { cidades } from '../data/site.js';
             {cidades.map((c) => <option>{c}</option>)}
           </select>
         </label>
-        <Input label="endereço" id="endereco" name="endereco" autocomplete="street-address" required />
+        <Input label="endereço da loja" id="endereco" name="endereco" autocomplete="street-address" required />
 
         <fieldset>
-          <legend class="ds-field__label">pagamento na entrega</legend>
-          <label class="choice"><input type="radio" name="pagamento" value="pix" required /> pix</label>
-          <label class="choice"><input type="radio" name="pagamento" value="cartão" /> cartão</label>
-          <label class="choice"><input type="radio" name="pagamento" value="dinheiro" /> dinheiro</label>
+          <legend class="ds-field__label">freezer</legend>
+          <label class="choice"><input type="radio" name="freezer" value="quero um freezer emprestado" required /> quero um freezer emprestado</label>
+          <label class="choice"><input type="radio" name="freezer" value="já tenho freezer da uaice" /> já tenho freezer da uaice</label>
+        </fieldset>
+
+        <fieldset>
+          <legend class="ds-field__label">pagamento</legend>
+          <label class="choice"><input type="radio" name="pagamento" value="boleto para 28 dias" required /> boleto para 28 dias</label>
+          <label class="choice"><input type="radio" name="pagamento" value="pix na entrega" /> pix na entrega</label>
         </fieldset>
 
         <p class="t-small" id="form-error" role="alert"></p>
@@ -41,15 +59,16 @@ import { cidades } from '../data/site.js';
         <div class="ds-card">
           <h2 class="t-heading-sm">seu pedido</h2>
           <div class="order-lines" id="summary-lines"></div>
+          <div class="order-total"><span class="t-small">unidades</span><span class="t-body-strong" id="summary-units"></span></div>
           <div class="order-total"><span class="t-body-strong">total</span><span class="t-heading-sm" id="summary-total"></span></div>
-          <a class="ds-link ds-link--light t-body-strong" href="/carrinho">editar carrinho</a>
+          <a class="ds-link ds-link--light t-body-strong" href="/carrinho">editar pedido</a>
         </div>
       </aside>
     </div>
 
     <div class="ds-card cart-empty" id="checkout-empty" hidden>
-      <p class="t-heading-sm">seu carrinho está vazio</p>
-      <p class="t-small">Escolha um sabor na loja antes de finalizar.</p>
+      <p class="t-heading-sm" id="empty-title">seu pedido está vazio</p>
+      <p class="t-small" id="empty-text">Escolha os sabores na loja antes de finalizar.</p>
       <a class="ds-btn ds-btn--secondary" href="/comprar">ver a loja</a>
     </div>
 
@@ -58,23 +77,31 @@ import { cidades } from '../data/site.js';
       <h2 class="t-title" id="done-title"></h2>
       <p id="done-text"></p>
       <div class="order-lines" id="done-lines"></div>
-      <p class="t-caption">Compra simulada: nada foi cobrado e nenhum dado foi enviado.</p>
+      <p class="t-caption">Pedido simulado: nada foi cobrado e nenhum dado foi enviado.</p>
       <a class="ds-btn ds-btn--secondary" href="/comprar">voltar para a loja</a>
     </div>
   </Section>
 </Base>
 
 <script>
-  import { lines, total, clear } from '../scripts/cart.js';
+  import { lines, total, units, missing, clear } from '../scripts/cart.js';
+  import { cnpjOk, formata } from '../scripts/cnpj.js';
   import { brl } from '../data/site.js';
 
   const form = document.getElementById('checkout-form');
   const error = document.getElementById('form-error');
+  const cnpj = document.getElementById('cnpj');
+
+  // máscara 00.000.000/0000-00 enquanto digita (aceita letras: CNPJ alfanumérico)
+  cnpj.addEventListener('input', () => {
+    cnpj.value = formata(cnpj.value);
+    cnpj.setCustomValidity('');
+  });
 
   function lineRow(it) {
     const row = document.createElement('div');
     row.className = 'order-line';
-    const a = document.createElement('span'); a.className = 't-small'; a.textContent = `${it.q} × ${it.name}`;
+    const a = document.createElement('span'); a.className = 't-small'; a.textContent = `${it.q} ${it.q > 1 ? 'caixas' : 'caixa'} × ${it.name}`;
     const b = document.createElement('span'); b.className = 't-body-strong'; b.textContent = brl(it.subtotal);
     row.append(a, b);
     return row;
@@ -82,17 +109,31 @@ import { cidades } from '../data/site.js';
 
   function render() {
     const items = lines();
-    document.getElementById('checkout').hidden = items.length === 0;
-    document.getElementById('checkout-empty').hidden = items.length > 0;
+    const falta = missing();
+    // sem itens ou abaixo do pedido mínimo: não mostra o formulário
+    const blocked = items.length === 0 || falta > 0;
+    document.getElementById('checkout').hidden = blocked;
+    document.getElementById('checkout-empty').hidden = !blocked;
+    // reescreve sempre: com a outra aba, o pedido pode passar de "abaixo do mínimo" para vazio
+    const vazio = items.length === 0;
+    document.getElementById('empty-title').textContent = vazio ? 'seu pedido está vazio' : 'pedido abaixo do mínimo';
+    document.getElementById('empty-text').textContent = vazio
+      ? 'Escolha os sabores na loja antes de finalizar.'
+      : `Faltam ${falta} ${falta > 1 ? 'caixas' : 'caixa'} para o pedido mínimo.`;
     document.getElementById('summary-lines').replaceChildren(...items.map(lineRow));
+    document.getElementById('summary-units').textContent = String(units());
     document.getElementById('summary-total').textContent = brl(total());
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (missing() > 0) { render(); return; } // o pedido mudou em outra aba
+    cnpj.setCustomValidity(cnpjOk(cnpj.value) ? '' : 'CNPJ inválido');
     if (!form.checkValidity()) {
       const first = form.querySelector(':invalid');
-      error.textContent = 'Confira os campos: todos são obrigatórios e o e-mail precisa ser válido.';
+      error.textContent = first === cnpj
+        ? 'Confira o CNPJ: os números não batem com os dígitos verificadores.'
+        : 'Confira os campos: todos são obrigatórios e o e-mail precisa ser válido.';
       first?.focus();
       return;
     }
@@ -104,7 +145,8 @@ import { cidades } from '../data/site.js';
 
     document.getElementById('done-title').textContent = `pedido ${code}`;
     document.getElementById('done-text').textContent =
-      `Obrigado, ${String(data.get('nome')).trim().split(' ')[0]}. ${n} ${n > 1 ? 'picolés' : 'picolé'} para entrega em ${data.get('cidade')}, pagamento em ${data.get('pagamento')} na entrega. Total: ${brl(total())}.`;
+      `${data.get('loja')}: ${n} ${n > 1 ? 'caixas' : 'caixa'} (${units()} unidades) para entrega em ${data.get('cidade')} na próxima rota semanal. ` +
+      `Pagamento: ${data.get('pagamento')}. Freezer: ${data.get('freezer')}. Total: ${brl(total())}.`;
     document.getElementById('done-lines').replaceChildren(...items.map(lineRow));
 
     clear();
@@ -115,5 +157,7 @@ import { cidades } from '../data/site.js';
     done.focus();
   });
 
+  // outra aba mudou o pedido: o resumo não pode ficar velho (depois de confirmado, a tela fica como está)
+  window.addEventListener('storage', () => { if (document.getElementById('checkout-done').hidden) render(); });
   render();
 </script>

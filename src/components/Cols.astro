@@ -1,8 +1,10 @@
 ---
 // ColumnGrid do design system. items: [[título, texto], ...]; cols: 2, 3 ou 4.
-const { items, cols = 4 } = Astro.props;
+// cards: cada item vira um cartão branco; no celular ficam 2 lado a lado e o resto arrasta para o lado.
+// stack (com cards): no celular os cartões ficam um embaixo do outro, sem arrastar.
+const { items, cols = 4, cards = false, stack = false } = Astro.props;
 ---
-<div class:list={['ds-cols', { [`ds-cols--${cols}`]: cols !== 4 }]}>
+<div class:list={['ds-cols', { [`ds-cols--${cols}`]: cols !== 4, 'ds-cols--cards': cards, 'ds-cols--stack': stack }]}>
   {items.map(([title, body]) => (
     <div class="ds-cols__col"><h3 class="ds-cols__title">{title}</h3><p class="ds-cols__body">{body}</p></div>
   ))}

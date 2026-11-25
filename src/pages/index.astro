@@ -5,98 +5,98 @@ import Hero from '../components/Hero.astro';
 import Feature from '../components/Feature.astro';
 import ProfileCard from '../components/ProfileCard.astro';
 import Cols from '../components/Cols.astro';
-import Rows from '../components/Rows.astro';
 import Intro from '../components/Intro.astro';
 import Logo from '../components/Logo.astro';
 import Button from '../components/Button.astro';
 import Tag from '../components/Tag.astro';
-import { sabores } from '../data/site.js';
-const [chefe, ...outros] = sabores;
+import Pontos from '../components/Pontos.astro';
+import { sabores, ficha } from '../data/site.js';
+const [chefe] = sabores;
+const [porcao, proteina, fibras, kcal] = ficha.map(([numero]) => numero); // números do loja.json
 // Foto da capa: coloque o arquivo em public/img/ e escreva o caminho aqui, ex.: '/img/capa.jpg'.
 const capa = '';
 ---
-<Base title="uaice cream · conheça a nova linha uaice fit" description="Picolé de 60 g com proteína e recheio cremoso, sem adição de açúcar. Nas lojas de nicho do Triângulo Mineiro.">
+<Base title="uaice cream · picolés uaice fit" description="Picolé de 60 g com proteína e recheio cremoso, sem adição de açúcar. Vendido em lojas de produtos naturais e de suplementos de Uberaba e Uberlândia.">
 
   <!-- 1. a marca, em uma frase. Capa em tela cheia: foto ao fundo com vidro desfocado por cima -->
   <Section tone="dark" class="site-cover" stack={false}>
     <Fragment slot="bg">
+      <div class="site-cover__bg" aria-hidden="true"></div>
       {capa && <div class="site-cover__photo" style={`background-image:url('${capa}')`}></div>}
       {capa && <div class="site-cover__glass"></div>}
     </Fragment>
-    <Hero title="sorvete com jeito mineiro e cabeça fit" lead="A uaice cream junta o uai de Minas com o ice cream. Fazemos picolés com sabor de sorveteria, do tamanho certo para quem passou a comer menos.">
+    <Hero title="picolé com proteína e recheio cremoso" lead="A uaice cream faz picolés de 60 g com base de iogurte proteico e sem adição de açúcar, para quem passou a comer menos e ainda quer um doce.">
       <Logo slot="top" line="cream" tone="dark" />
       <div class="site-actions">
-        <Button href="#uaice-fit">conhecer a uaice fit</Button>
-        <Button href="/comprar" variant="secondary">ir para a loja</Button>
+        <Button href="#uaice-fit">ver a uaice fit</Button>
+        <Button href="/comprar" variant="secondary">sou lojista</Button>
       </div>
     </Hero>
   </Section>
 
   <!-- 2. a nova linha -->
-  <Section id="uaice-fit" stack={false}>
+  <Section id="uaice-fit" class="media-fit" stack={false}>
     <Feature
-      title="uaice fit: pequeno no tamanho, cheio de recheio"
-      body="A nova linha da uaice cream é um picolé de 60 g com base de iogurte proteico e recheio cremoso por dentro, sem adição de açúcar. É para quem ainda quer um doce no dia sem sair da dieta."
-      cta="ver os sabores" href="#sabores">
+      title="uaice fit: picolé de 60 g com recheio"
+      body="A nova linha da uaice cream é um picolé de 60 g com base de iogurte proteico e recheio cremoso por dentro, sem adição de açúcar. Dá para comer um doce no dia mesmo estando de dieta."
+      cta="ver os sabores" href="#sabores" image="/img/embalagens/embalagens-horizontal.jpg" alt="As seis embalagens da linha uaice fit lado a lado">
       <Tag slot="top">lançamento</Tag>
     </Feature>
   </Section>
 
   <!-- 3. o diferencial -->
   <Section id="diferencial">
-    <Intro label="o diferencial" title="sabor de sorveteria, sem cara de suplemento">
-      <p>Os picolés proteicos do mercado parecem suplemento, e o pote facilita comer demais. A uaice fit é uma porção só, com recheio que aparece na primeira mordida.</p>
+    <Intro label="o que muda" title="o gosto é de picolé de sorveteria">
+      <p>Muitos picolés e sorvetes proteicos têm gosto de suplemento, e no pote é fácil comer mais de uma porção. A uaice fit vem em uma porção só, com recheio que aparece na primeira mordida.</p>
     </Intro>
-    <Cols items={[
-      ['60 g', 'Porção individual, sem pote para exagerar.'],
-      ['cerca de 8 g', 'de proteína, com base de iogurte proteico.'],
+    <Cols cards items={[
+      [porcao, 'Uma porção, sem pote.'],
+      [proteina, 'de proteína, com base de iogurte proteico.'],
       ['recheio cremoso', 'Por dentro de todos os sabores.'],
-      ['até 120 kcal', 'Sem adição de açúcar e com cerca de 3 g de fibras.'],
+      [kcal, `Sem adição de açúcar e com ${fibras} de fibras.`],
     ]} />
   </Section>
 
-  <!-- 4. os produtos: carro-chefe primeiro, depois a linha -->
-  <Section id="sabores">
+  <!-- 4. os produtos: sabor principal primeiro, depois todos os sabores -->
+  <Section id="sabores" class="media-fit">
     <Feature reverse
       title={chefe.name}
       body="Goiabada com creme de queijo doce, uma das combinações mais ligadas a Minas, no recheio de um picolé de iogurte proteico. O recheio aparece logo na primeira mordida."
-      cta="conhecer o carro-chefe" href={`/sabores/${chefe.id}`} image={chefe.image} alt={chefe.name}>
-      <Tag slot="top">carro-chefe</Tag>
+      cta="ver o romeu e julieta" href={`/sabores/${chefe.id}`} image={`/img/sabores/${chefe.id}.jpg`} alt={chefe.name}>
+      <Tag slot="top">sabor principal</Tag>
     </Feature>
-    <Intro label="a linha completa" title="mais cinco sabores para escolher">
-      <p>Todos com 60 g e recheio cremoso por dentro.</p>
+    <Intro label="todos os sabores" title="os seis sabores da uaice fit">
+      <p>Todos têm 60 g e recheio cremoso por dentro. O romeu e julieta, sabor principal da linha, vem primeiro.</p>
     </Intro>
-    <div class="site-grid">
-      {outros.map((s) => <ProfileCard name={s.name} cta="ver sabor" href={`/sabores/${s.id}`} image={s.image} alt={s.name} />)}
+    <div class="site-grid site-grid--3">
+      {sabores.map((s) => <ProfileCard name={s.name} cta="ver sabor" href={`/sabores/${s.id}`} image={`/img/sabores/${s.id}-home.jpg`} alt={s.name} />)}
     </div>
   </Section>
 
   <!-- 5. no dia a dia -->
   <Section id="dia-a-dia">
-    <Intro label="no seu dia" title="dá para comer menos e continuar comendo doce">
-      <p>Para quem está se cuidando e também para quem não está de dieta.</p>
+    <Intro label="no seu dia" title="quando comer">
+      <p>Serve para quem está de dieta e para quem não está.</p>
     </Intro>
-    <Cols cols={3} items={[
-      ['no meio da tarde', 'Um doce pequeno na hora em que a vontade aparece.'],
-      ['depois do treino', 'Gelado e com proteína, mas com gosto de sobremesa.'],
-      ['depois do almoço', 'Uma sobremesa de 60 g, sem pote para repetir.'],
+    <Cols cards stack cols={3} items={[
+      ['no meio da tarde', 'Um doce pequeno quando bate a vontade.'],
+      ['depois do treino', 'Gelado, com proteína e gosto de sobremesa.'],
+      ['depois do almoço', 'Uma sobremesa de 60 g, sem pote.'],
     ]} />
   </Section>
 
   <!-- 6. onde comprar -->
   <Section id="onde-comprar">
-    <Feature label="onde comprar" title="no freezer da sua loja favorita"
-      body="A uaice fit está nas lojas de produtos naturais, de suplementos, empórios saudáveis, cafeterias e academias. Procure o freezer da uaice no balcão." />
-    <Rows items={[
-      ['agora', 'Uberaba e Uberlândia.'],
-      ['em breve', 'Araxá, Araguari e Ituiutaba.'],
-    ]} />
+    <Feature label="onde comprar" title="no freezer da uaice, dentro das lojas"
+      body="A uaice fit é vendida em lojas de produtos naturais, lojas de suplementos, empórios, cafeterias e academias. Os picolés ficam num freezer da uaice perto do balcão."
+      image="/img/freezer.jpg" alt="Freezer horizontal da uaice cream, com tampa de vidro e faixas em tons de verde" />
+    <Pontos />
   </Section>
 
   <!-- 7. chamada final -->
   <Section stack={false}>
-    <Hero as="h2" title="pronto para provar?" lead="Monte seu pedido com os seis sabores da linha uaice fit.">
-      <div class="site-actions"><Button href="/comprar" variant="secondary">montar meu pedido</Button></div>
+    <Hero as="h2" title="venda a uaice fit na sua loja" lead="Para lojas de produtos naturais, suplementos, empórios, cafeterias e academias. A uaice empresta o freezer e entrega toda semana.">
+      <div class="site-actions"><Button href="/comprar" variant="secondary">fazer pedido como lojista</Button></div>
     </Hero>
   </Section>
 </Base>

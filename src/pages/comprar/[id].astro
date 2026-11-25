@@ -1,22 +1,39 @@
 ---
-// Página de compra de um sabor: escolhe a quantidade e põe no carrinho ou compra direto.
+// Página de compra de um sabor para lojistas: escolhe quantas caixas e põe no pedido.
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
 import Media from '../../components/Media.astro';
 import Tag from '../../components/Tag.astro';
 import Button from '../../components/Button.astro';
 import Qty from '../../components/Qty.astro';
-import { sabores, PRICE, brl } from '../../data/site.js';
+import { sabores, PRICE, SUGERIDO, CAIXA, PRICE_CAIXA, MINIMO, brl } from '../../data/site.js';
 
 export function getStaticPaths() {
   return sabores.map((s) => ({ params: { id: s.id }, props: { s } }));
 }
 const { s } = Astro.props;
+// galeria: foto do picolé, foto de perto (-home) e a embalagem, nessa ordem
+const fotos = [
+  { src: `/img/sabores/${s.id}.jpg`, alt: `picolé ${s.name}` },
+  { src: `/img/sabores/${s.id}-home.jpg`, alt: `picolé ${s.name} mordido, mostrando o recheio` },
+  { src: `/img/embalagens/embalagem-${s.id}.jpg`, alt: `embalagem do picolé ${s.name}` },
+];
 ---
-<Base title={`comprar ${s.name} · uaice fit`} description={s.desc}>
+<Base title={`${s.name} para lojistas · uaice fit`} description={s.desc}>
   <Section>
     <div class="buy" data-product={s.id}>
-      <Media image={s.image} alt={s.name} />
+      <div class="gallery" data-gallery>
+        <div class="gallery__track" tabindex="0" aria-label={`fotos de ${s.name}`}>
+          {fotos.map((f) => <div class="gallery__slide"><Media image={f.src} alt={f.alt} /></div>)}
+        </div>
+        <div class="gallery__thumbs">
+          {fotos.map((f, i) => (
+            <button type="button" class="gallery__thumb" aria-label={`ver foto ${i + 1} de ${fotos.length}`} aria-current={i === 0 ? 'true' : undefined}>
+              <img src={f.src} alt="" loading="lazy" decoding="async" />
+            </button>
+          ))}
+        </div>
+      </div>
       <div class="ds-card">
         <div class="product-tags">
           <Tag>uaice fit</Tag>
@@ -24,21 +41,34 @@ const { s } = Astro.props;
         </div>
         <h1 class="t-title">{s.name}</h1>
         <p>{s.desc}</p>
-        <p class="t-heading">{brl(PRICE)} <span class="t-small">a unidade de 60 g</span></p>
-        <Qty name={s.name} />
+        <p class="t-heading">{brl(PRICE_CAIXA)} <span class="t-small">a caixa com {CAIXA} unidades de 60 g</span></p>
+        <ul class="buy-facts t-small">
+          <li>{brl(PRICE)} por unidade para a loja</li>
+          <li>preço sugerido de revenda: {brl(SUGERIDO)}, com {brl(SUGERIDO - PRICE)} de margem por unidade</li>
+          <li>pedido mínimo de {MINIMO} caixas, que podem ser de sabores diferentes</li>
+        </ul>
+        <span class="ds-field__label">caixas</span>
+        <Qty name={s.name} unit="caixa" />
         <div class="buy-actions">
-          <Button data-add>adicionar ao carrinho</Button>
-          <Button variant="secondary" data-buy-now>comprar agora</Button>
+          <Button data-add>adicionar ao pedido</Button>
+          <Button variant="secondary" data-buy-now>adicionar e ver o pedido</Button>
         </div>
         <p class="t-small" role="status" data-status></p>
         <a class="ds-link ds-link--light t-body-strong" href={`/sabores/${s.id}`}>ver detalhes do sabor</a>
       </div>
     </div>
   </Section>
+
+  <!-- celular: barra fixa com o botão de adicionar, some quando o botão do card aparece -->
+  <div class="buy-bar" data-buy-bar hidden>
+    <span class="buy-bar__price"><span class="t-body-strong">{brl(PRICE_CAIXA)}</span> <span class="t-caption">/ caixa de {CAIXA}</span></span>
+    <Button data-bar-add>adicionar</Button>
+  </div>
 </Base>
 
 <script>
   import { add, MAX } from '../../scripts/cart.js';
+  import { CAIXA } from '../../data/site.js';
 
   const root = document.querySelector('[data-product]');
   const id = root.dataset.product;
@@ -54,18 +84,29 @@ const { s } = Astro.props;
       return;
     }
     if (e.target.closest('[data-add]')) {
-      add(id, q);
-      status.replaceChildren(`${q} ${q > 1 ? 'picolés adicionados' : 'picolé adicionado'} ao carrinho. `);
+      const n = add(id, q); // pode entrar menos que q: cada sabor vai até MAX caixas
+      status.replaceChildren(n > 0
+        ? `${n} ${n > 1 ? 'caixas adicionadas' : 'caixa adicionada'} ao pedido (${n * CAIXA} unidades)${n < q ? `, o máximo é ${MAX} por sabor` : ''}. `
+        : `Este sabor já está no máximo de ${MAX} caixas no pedido. `);
       const link = document.createElement('a');
       link.href = '/carrinho';
       link.className = 'ds-link ds-link--light';
-      link.textContent = 'ver carrinho';
+      link.textContent = 'ver o pedido';
       status.append(link);
       return;
     }
     if (e.target.closest('[data-buy-now]')) {
       add(id, q);
-      window.location.href = '/checkout';
+      window.location.href = '/carrinho';
     }
+  });
+  // barra fixa do celular: aparece enquanto o botão "adicionar ao pedido" do card ainda está abaixo da tela
+  const bar = document.querySelector('[data-buy-bar]');
+  const barBtn = bar.querySelector('[data-bar-add]');
+  new IntersectionObserver(([en]) => { bar.hidden = en.isIntersecting || en.boundingClientRect.top < 0; })
+    .observe(root.querySelector('[data-add]'));
+  barBtn.addEventListener('click', () => {
+    barBtn.textContent = add(id, q) > 0 ? 'adicionado' : 'no máximo';
+    setTimeout(() => { barBtn.textContent = 'adicionar'; }, 2000);
   });
 </script>

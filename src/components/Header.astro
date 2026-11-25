@@ -5,25 +5,18 @@ import { menu as menuItems } from '../data/site.js';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <div class="site-header">
-  <!-- camada clara: é a que recebe cliques e teclado -->
-  <header class="ds-header site-header__base">
-    <a class="site-home" href="/" aria-label="uaice cream, início"><Logo tone="light" size={28} decorative /></a>
+  <!-- cabeçalho fixo, sempre verde escuro com texto claro -->
+  <header class="ds-header">
+    <a class="site-home" href="/" aria-label="uaice cream, início"><Logo tone="dark" size={28} decorative /></a>
     <span class="ds-header__sp"></span>
     <!-- carrinho sempre à mão + botão que abre o menu em tela cheia (celular e computador) -->
-    <a class="ds-header__btn" href="/carrinho" aria-label="carrinho">
+    <a class="ds-header__btn" href="/carrinho" aria-label="pedido (caixas)">
       <Icon name="carrinho" /><span data-cart-count>0</span>
     </a>
     <button class="ds-header__btn" type="button" data-menu-open aria-expanded="false" aria-controls="site-menu">
       <Icon name="menu" /><span>menu</span>
     </button>
   </header>
-  <!-- camada escura: cópia só visual, recortada pelo site.js onde há faixa escura atrás; cliques passam para a clara -->
-  <div class="ds-header site-header__dark" aria-hidden="true" inert>
-    <span class="site-home"><Logo tone="dark" size={28} decorative /></span>
-    <span class="ds-header__sp"></span>
-    <span class="ds-header__btn"><Icon name="carrinho" /><span data-cart-count>0</span></span>
-    <span class="ds-header__btn"><Icon name="menu" /><span>menu</span></span>
-  </div>
 </div>
 
 <!-- Menu em tela cheia: um item por linha; grupos abrem os subitens logo abaixo. -->

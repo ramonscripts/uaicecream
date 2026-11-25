@@ -12,7 +12,11 @@ npm run dev      # http://localhost:4321
 npm run build    # gera dist/
 ```
 
-A Vercel usa o `vercel.json` (Astro, `npm run build`, saída em `dist/`).
+```sh
+npm test         # testa a conferência do CNPJ
+```
+
+A Vercel usa o `vercel.json`: Astro (que já roda `npm run build` e publica `dist/`) e instalação com `npm ci`.
 
 ## Onde mexer
 
@@ -31,11 +35,15 @@ A Vercel usa o `vercel.json` (Astro, `npm run build`, saída em `dist/`).
 | Regras do carrinho (salvo no navegador) | `src/scripts/cart.js` |
 | Trabalho de marketing (`/planejamento`) | `src/pages/planejamento.astro` |
 | Estrutura comum (head, Header, Footer) | `src/layouts/Base.astro` |
+| Componentes (Feature, Hero, ProfileCard, Button, Tag...) | `src/components/` |
 
 Cada sabor novo em `sabores.json` ganha sozinho a página de detalhes, a de compra e o item no menu.
 
-Campos de `sabores.json`: `id` vira o endereço (`/sabores/<id>`), `desc` é a frase curta dos cards, `about` é o texto da página de detalhes e `image` é o caminho da foto em `public/img/` (ex.: `/img/romeu-julieta.jpg`; vazio deixa só o espaço reservado). Os arquivos `.json` não aceitam comentários nem vírgula depois do último item: se algo estiver errado, o `npm run build` acusa o arquivo e a linha.
-| Componentes (Feature, Hero, ProfileCard, Button, Tag...) | `src/components/` |
+Campos de `sabores.json`: `id` vira o endereço (`/sabores/<id>`) e o nome das fotos, `desc` é a frase curta dos cards e `about` é o texto da página de detalhes. Os arquivos `.json` não aceitam comentários nem vírgula depois do último item: se algo estiver errado, o `npm run build` acusa o arquivo e a linha.
+
+Cada sabor precisa de três fotos, com o `id` no nome: `public/img/sabores/<id>.jpg`, `public/img/sabores/<id>-home.jpg` (de perto, mostrando o recheio) e `public/img/embalagens/embalagem-<id>.jpg`. Sem elas, as páginas mostram imagem quebrada. Reduza as fotos antes de pôr no site (cerca de 1600 px de largura, até uns 200 KB cada).
+
+Os números do picolé (peso, proteína, fibras, calorias) ficam em `ficha`, no `loja.json`, e aparecem nos cards da home, do planejamento e das páginas de sabor. Mantenha a ordem (peso, proteína, fibras, calorias): a home lê os números pela posição.
 
 ## Design system
 

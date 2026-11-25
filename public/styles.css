@@ -42,18 +42,14 @@ a.ds-btn{display:inline-flex;align-items:center;justify-content:center;text-deco
 .ds-header__btn{min-height:48px;text-decoration:none}
 .ds-header__btn:focus-visible{color:var(--lime)}
 
-/* cabeçalho fixo "sem fundo": fica por cima da página sem ocupar espaço próprio (margem negativa)
-   e cada parte dele tem a cor da faixa que está atrás. site.js recorta a camada escura. */
+/* cabeçalho fixo, sempre verde escuro: fica por cima da página sem ocupar espaço próprio (margem negativa).
+   site.js mede a altura dele em --header-h. */
 .site-header{position:sticky;top:0;z-index:20;margin-bottom:calc(-1 * var(--header-h, 80px))}
-.site-header__base{background:var(--surface);color:var(--ink)}
-.site-header__base .ds-header__notice,.site-header__base .ds-header__btn{color:var(--ink)}
-.site-header__base .ds-header__btn:hover,.site-header__base .ds-header__btn:focus-visible{color:var(--ink);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
-.site-header__dark{position:absolute;inset:0;pointer-events:none;clip-path:inset(0 0 100% 0)}
-.site-header__dark .ds-logo,.site-menu__top .ds-logo{--ls:-.02em}  /* mesmo espaçamento do logo claro, para as duas camadas coincidirem na troca */
+.site-menu__top .ds-logo{--ls:-.02em}
 /* a primeira faixa de cada página começa por baixo do cabeçalho: ganha esse espaço a mais no topo */
 main > .ds-section:first-child{padding-top:calc(var(--space-6) + var(--header-h, 80px))}
 .site-home{display:inline-flex;text-decoration:none;outline:none}
-.ds-header__btn{white-space:nowrap;letter-spacing:0}  /* botão e texto com o mesmo espaçamento nas duas camadas */
+.ds-header__btn{white-space:nowrap;letter-spacing:0}
 
 /* menu em tela cheia (inspirado no harvard.edu): fundo forest, itens grandes em serif, um por linha */
 .site-menu{position:fixed;inset:0;z-index:40;--surface:var(--forest);--ink:var(--ivory);background:var(--surface);color:var(--ink);
@@ -89,6 +85,8 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .site-menu__sub li{font:400 24px/34px var(--font-sans);letter-spacing:-.25px}
 .ds-cols--2{grid-template-columns:repeat(2,1fr)}
 .ds-cols--3{grid-template-columns:repeat(3,1fr)}
+/* Cols com cards: cartão branco por item */
+.ds-cols--cards .ds-cols__col{background:var(--card);border-radius:var(--radius-lg);padding:var(--space-4)}
 .ds-rows__row{grid-template-columns:1fr 2fr}
 
 /* layout */
@@ -97,6 +95,31 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .intro{display:flex;flex-direction:column;gap:var(--space-3);max-width:720px}
 .site-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);justify-content:center}
 .site-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-5)}
+/* imagem ao lado do texto (Feature): sempre 4:3 */
+.ds-feature .ds-media{aspect-ratio:4/3}
+/* home: 3 sabores por linha, cartões em 3:4 */
+.site-grid--3{grid-template-columns:repeat(3,1fr)}
+.site-grid--3 .ds-profile{aspect-ratio:3/4;min-height:0;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
+.site-grid--3 .ds-media img{transition:transform .6s cubic-bezier(.16,1,.3,1)}
+/* "experimente também": 3 por vez e o resto arrasta para o lado; padding em cima/baixo para o hover e a sombra não serem cortados */
+.site-grid--3.site-grid--rail{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 2 * var(--space-5)) / 3);
+  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-block:var(--space-2) var(--space-4);margin-top:calc(-1 * var(--space-2))}
+.site-grid--rail > *{scroll-snap-align:start}
+.site-grid--rail{scrollbar-width:none}
+.site-grid--rail::-webkit-scrollbar{display:none}
+/* setas da linha: ao lado do título, no estilo das setas do site; apagadas quando não há mais para o lado */
+.rail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-3);margin-bottom:var(--space-5)}
+.rail-nav{display:flex;gap:var(--space-2);flex:none}
+.rail--fits .rail-nav{display:none}
+.rail-btn{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:0;border-radius:var(--radius-pill);background:var(--forest);color:var(--ivory);cursor:var(--cursor-mao);transition:opacity .25s ease,transform .25s ease}
+.rail-btn:hover:not(:disabled){transform:scale(1.06)}
+.rail-btn:focus-visible{outline:2px solid var(--forest);outline-offset:3px}
+.rail-btn:disabled{opacity:.25;cursor:default}
+/* home: mesmo movimento dos cartões da loja ao passar o mouse */
+@media (hover:hover){
+  .site-grid--3 .ds-profile:hover{transform:translateY(-6px);box-shadow:0 16px 32px -12px rgb(0 0 0 / .25)}
+  .site-grid--3 .ds-profile:hover .ds-media img{transform:scale(1.05)}
+}
 
 /* foto dentro do espaço de imagem: cobre o espaço sem distorcer */
 .ds-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -106,6 +129,12 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .site-cover{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
   min-height:100vh;min-height:100svh}  /* o cabeçalho fica por cima da capa */
 .site-cover .ds-section__in{position:relative;z-index:1;width:100%}
+/* capa: gradiente parado sobre o forest. A luz emerald fica no meio da altura (não colada no topo), para a
+   borda de baixo do cabeçalho, que também é forest, não aparecer como um corte. Toque de lime embaixo à direita. */
+.site-cover__bg{position:absolute;inset:0;background:
+  radial-gradient(110% 60% at 10% 50%, color-mix(in srgb, var(--emerald) 70%, transparent) 0%, transparent 70%),
+  radial-gradient(90% 70% at 100% 100%, color-mix(in srgb, var(--lime) 30%, transparent) 0%, transparent 65%),
+  var(--forest)}
 .site-cover__photo{position:absolute;inset:0;background:var(--forest) center/cover no-repeat}
 /* vidro desfocado (efeito da Apple): desfoca e satura o que está atrás, com um véu forest para o texto ler bem */
 .site-cover__glass{position:absolute;inset:0;background:color-mix(in srgb, var(--forest) 55%, transparent);
@@ -120,8 +149,21 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .shop{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:var(--space-5);align-items:start}
 .product{height:100%}
 .product .ds-card{height:100%;display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start}
-.product .ds-media{aspect-ratio:4/3}
+.product .ds-media{aspect-ratio:3/4;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+/* foto até as bordas do cartão: desfaz o padding do .ds-card no topo e nas laterais */
+.product .product-media{width:calc(100% + 2 * var(--space-4));margin:calc(-1 * var(--space-4)) calc(-1 * var(--space-4)) 0}
+.site-grid--shop{grid-template-columns:repeat(3,1fr)}
+/* loja: cartão sobe e a foto aproxima ao passar o mouse (só em telas com mouse) */
+.product .ds-card{transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1)}
+.product .ds-media img{transition:transform .6s cubic-bezier(.16,1,.3,1)}
+@media (hover:hover){
+  .product:hover .ds-card{transform:translateY(-6px);box-shadow:0 16px 32px -12px rgb(0 0 0 / .25)}
+  .product:hover .ds-media img{transform:scale(1.05)}
+}
+/* loja: tags no canto superior esquerdo, por cima da foto (a foto começa no topo do cartão) */
+.product .ds-card{position:relative}
 .product-tags{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.product .product-tags{position:absolute;top:var(--space-3);left:var(--space-3);right:var(--space-3);z-index:1}
 .product-foot{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);width:100%;margin-top:auto}
 .order{position:sticky;top:var(--space-4)}
 .order .ds-card{display:flex;flex-direction:column;gap:var(--space-3)}
@@ -138,6 +180,22 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .buy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-5);align-items:start}
 .buy .ds-card{display:flex;flex-direction:column;gap:var(--space-3);align-items:flex-start}
 .buy-actions{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.buy-bar{display:none}
+.buy-bar__price,.buy-bar .ds-btn{white-space:nowrap}  /* tudo numa linha só */
+.buy-facts{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:var(--space-1)}
+/* galeria da página de compra: fotos em 3:4 que deslizam para o lado, com miniaturas embaixo */
+.gallery{display:flex;flex-direction:column;gap:var(--space-3);min-width:0}
+.gallery__track{display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:var(--radius-lg);scrollbar-width:none;outline:none}
+.gallery__track::-webkit-scrollbar{display:none}
+.gallery__track:focus-visible{outline:2px solid var(--forest);outline-offset:3px}
+.gallery__slide{scroll-snap-align:start}
+.gallery__slide .ds-media{aspect-ratio:3/4;border-radius:0}
+.gallery__thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2)}  /* miniaturas quadradas ocupando a largura toda */
+.gallery__thumb{width:100%;aspect-ratio:1;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:none;cursor:var(--cursor-mao);opacity:.55;transition:opacity .2s ease,border-color .2s ease}
+.gallery__thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery__thumb:hover{opacity:1}
+.gallery__thumb[aria-current="true"]{border-color:var(--forest);opacity:1}
+.gallery__thumb:focus-visible{outline:2px solid var(--forest);outline-offset:2px}
 
 /* carrinho e checkout */
 .cart-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:var(--space-4);align-items:center}
@@ -155,6 +213,8 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
   .ds-feature{grid-template-columns:1fr}
   .ds-feature--rev .ds-feature__text{order:0}
   .ds-cols,.ds-cols--3{grid-template-columns:repeat(2,1fr)}
+  .site-grid--3,.site-grid--shop{grid-template-columns:repeat(2,1fr)}
+  .site-grid--3.site-grid--rail{grid-auto-columns:calc((100% - var(--space-5)) / 2)}
   .ds-rows__row{grid-template-columns:1fr;gap:var(--space-2)}
   .ds-hero__title{font-size:42px;line-height:50px;letter-spacing:-.25px}
   .ds-header__notice{display:none}
@@ -163,6 +223,9 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
   .shop{grid-template-columns:1fr}
   .order{position:static}
   .buy{grid-template-columns:1fr}
+  /* barra fixa embaixo com o botão de adicionar, até o botão de verdade aparecer na tela (site: comprar/[id]) */
+  .buy-bar{position:fixed;left:0;right:0;bottom:0;z-index:15;display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);
+    padding:var(--space-3);background:var(--card);box-shadow:0 -8px 24px -12px rgb(0 0 0 / .25)}
   .cart-line{grid-template-columns:1fr auto}
   .cart-end{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}
 }
@@ -170,6 +233,22 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
   .ds-section{padding:var(--space-6) var(--space-3)}
   .ds-footer{padding:var(--space-6) var(--space-3)}
   .ds-cols,.ds-cols--2,.ds-cols--3{grid-template-columns:1fr}
+  /* celular: 2 cartões por vez (o terceiro aparece na borda) e o resto arrasta para o lado */
+  .ds-cols.ds-cols--cards:not(.ds-cols--stack){grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc(50% - var(--space-5));gap:var(--space-3);
+    overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--space-3);overscroll-behavior-x:contain;
+    margin-inline:calc(-1 * var(--space-3));padding-inline:var(--space-3);scrollbar-width:none}
+  .ds-cols--cards::-webkit-scrollbar{display:none}
+  .ds-cols--cards > *{scroll-snap-align:start}
+  .ds-cols--cards .ds-cols__col{padding:var(--space-3)}
+  .site-grid--shop{grid-template-columns:1fr}
+  /* celular: uma linha que arrasta; cartão com 80% da largura para o próximo aparecer na borda */
+  .site-grid--3{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;gap:var(--space-3);
+    overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--space-3);overscroll-behavior-x:contain;
+    margin-inline:calc(-1 * var(--space-3));padding-inline:var(--space-3);scrollbar-width:none}
+  .site-grid--3::-webkit-scrollbar{display:none}
+  .site-grid--3 > *{scroll-snap-align:start}
+  .site-grid--3.site-grid--rail{grid-auto-columns:80%;gap:var(--space-3)}
+  .rail-nav{display:none}
   .ds-feature__title,.t-title{font:700 32px/38px var(--font-serif)}
   :root{--gutter:var(--space-3)}
   .ds-header{padding-top:var(--space-2);padding-bottom:var(--space-2);gap:var(--space-2)}
@@ -183,3 +262,37 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .js-reveal .reveal-title.is-in .reveal-word > span{transform:none;opacity:1}
 .js-reveal .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .js-reveal .reveal.is-in{opacity:1;transform:none}
+
+/* página do sabor no celular: foto ocupa a tela visível inteira ao abrir, com o texto por cima.
+   A margem negativa desfaz o padding da seção (topo com o cabeçalho e laterais). */
+@media (max-width:520px){
+  .sabor-hero .ds-feature{position:relative;display:flex;align-items:flex-end;min-height:100svh;
+    margin:calc(-1 * (var(--space-6) + var(--header-h, 80px))) calc(-1 * var(--space-3)) 0;color:var(--ivory)}
+  .sabor-hero .ds-feature > .ds-media{position:absolute;inset:0;height:100%;aspect-ratio:auto;border-radius:0}
+  .sabor-hero .ds-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--forest) 0,transparent 60%);opacity:.9}
+  .sabor-hero .ds-feature__text{position:relative;z-index:1;padding:var(--space-3) var(--space-3) var(--space-5)}
+}
+
+/* .media-fit no computador (carro-chefe da home e página do sabor): foto inteira (sem cortar em cima) e as laterais preenchidas
+   com as cores das bordas da própria foto (site.js calcula e põe em --edge-bg). */
+@media (min-width:521px){
+  .media-fit .ds-feature > .ds-media{background:var(--edge-bg, var(--emerald))}
+  .media-fit .ds-feature > .ds-media img{object-fit:contain}
+}
+/* carro-chefe e embalagens da home: foto inteira com laterais calculadas também no celular */
+#sabores.media-fit .ds-feature > .ds-media,#uaice-fit.media-fit .ds-feature > .ds-media{background:var(--edge-bg, var(--emerald))}
+#sabores.media-fit .ds-feature > .ds-media img,#uaice-fit.media-fit .ds-feature > .ds-media img{object-fit:contain}
+
+/* onde encontrar (Pontos.astro): cidade como categoria que abre e fecha, lugares em cartões brancos */
+.pontos{display:flex;flex-direction:column;gap:var(--space-3)}
+.pontos .intro{margin-bottom:var(--space-3)}
+.pontos__cidade{border-bottom:1px solid var(--ink)}
+.pontos__cidade:first-of-type{border-top:1px solid var(--ink)}
+.pontos__sum{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-4) 0;list-style:none;cursor:var(--cursor-mao);min-height:48px}
+.pontos__sum::-webkit-details-marker{display:none}
+.pontos__sum:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:var(--radius-sm, 8px)}
+.pontos__nome{font:700 24px/30px var(--font-serif);flex:1}
+.pontos__chev{transition:transform .25s ease}
+.pontos__cidade[open] .pontos__chev{transform:rotate(180deg)}
+.pontos__lista{list-style:none;margin:0;padding:0 0 var(--space-4);display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--space-3)}
+.pontos__lugar{display:flex;flex-direction:column;gap:var(--space-1);background:var(--card);border-radius:var(--radius-lg);padding:var(--space-4)}

@@ -8,6 +8,7 @@ import Cols from '../../components/Cols.astro';
 import Intro from '../../components/Intro.astro';
 import Button from '../../components/Button.astro';
 import Tag from '../../components/Tag.astro';
+import Pontos from '../../components/Pontos.astro';
 import { sabores, ficha } from '../../data/site.js';
 
 export function getStaticPaths() {
@@ -17,26 +18,39 @@ const { s } = Astro.props;
 const outros = sabores.filter((o) => o.id !== s.id);
 ---
 <Base title={`${s.name} · uaice fit`} description={s.desc}>
-  <Section>
-    <Feature title={s.name} body={s.about} image={s.image} alt={s.name}>
+  <Section class="sabor-hero media-fit">
+    <Feature title={s.name} body={s.about} image={`/img/sabores/${s.id}.jpg`} alt={s.name}>
       <div slot="top" class="product-tags">
         <Tag>uaice fit</Tag>
         {s.tags.map((t) => <Tag>{t}</Tag>)}
       </div>
       <div class="site-actions site-actions--start">
-        <Button href={`/comprar/${s.id}`}>comprar este sabor</Button>
+        <Button href="#onde-encontrar">onde encontrar</Button>
+        <Button href={`/comprar/${s.id}`} variant="secondary">pedir para minha loja</Button>
       </div>
     </Feature>
     <div class="stack-sm">
       <span class="t-label">em cada picolé</span>
-      <Cols items={ficha} />
+      <Cols cards items={ficha} />
     </div>
   </Section>
 
   <Section>
-    <Intro label="outros sabores" title="experimente também" />
-    <div class="site-grid">
-      {outros.map((o) => <ProfileCard name={o.name} cta="ver sabor" href={`/sabores/${o.id}`} image={o.image} alt={o.name} />)}
+    <Pontos />
+  </Section>
+
+  <Section>
+    <div class="rail">
+      <div class="rail-head">
+        <Intro label="outros sabores" title={`os outros ${outros.length} sabores`} />
+        <div class="rail-nav">
+          <button type="button" class="rail-btn" data-rail="prev" aria-label="sabores anteriores"><svg width="16" height="16" style="transform:scaleX(-1)" aria-hidden="true"><use href="#arrow" /></svg></button>
+          <button type="button" class="rail-btn" data-rail="next" aria-label="próximos sabores"><svg width="16" height="16" aria-hidden="true"><use href="#arrow" /></svg></button>
+        </div>
+      </div>
+      <div class="site-grid site-grid--3 site-grid--rail">
+        {outros.map((o) => <ProfileCard name={o.name} cta="ver sabor" href={`/sabores/${o.id}`} image={`/img/sabores/${o.id}-home.jpg`} alt={o.name} />)}
+      </div>
     </div>
   </Section>
 </Base>

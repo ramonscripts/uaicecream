@@ -1,31 +1,98 @@
 (function () {
-  // Cabeçalho "sem fundo": a camada clara fica embaixo e a escura por cima, recortada na
-  // altura exata das faixas escuras (.ds-section--dark e rodapé) que passam atrás dele.
+  // Atualizar a página (F5) volta sempre ao topo, mesmo com #âncora no endereço. Links e "voltar" seguem normais.
+  var nav = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (nav && nav.type === 'reload') {
+    // 'manual' fica valendo só para esta entrada do histórico; voltar para 'auto' no load deixava o navegador restaurar depois
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    // tira a #âncora do endereço antes do navegador pular até ela
+    if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+    var top = function () { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }; // sem a rolagem suave do html
+    document.addEventListener('DOMContentLoaded', top);
+    window.addEventListener('load', function () { top(); requestAnimationFrame(top); });
+  }
+
+  // Cabeçalho fixo: guarda a altura dele em --header-h para a primeira faixa da página começar por baixo.
   document.addEventListener('DOMContentLoaded', function () {
     var wrap = document.querySelector('.site-header');
     if (!wrap) return;
-    var dark = wrap.querySelector('.site-header__dark');
-    var zones = [].slice.call(document.querySelectorAll('.ds-section--dark, .ds-footer'));
-    var ticking = false;
-    function update() {
-      ticking = false;
-      var h = wrap.getBoundingClientRect().height; // altura exata, sem arredondar (evita um fio escuro na borda)
-      document.documentElement.style.setProperty('--header-h', h + 'px');
-      var clip = null;
-      var dpr = window.devicePixelRatio || 1;
-      var snap = function (v) { v = Math.round(v * dpr) / dpr; return v < 1 ? 0 : (h - v < 1 ? h : v); }; // pixel físico, sem fio de meio pixel nas bordas
-      for (var i = 0; i < zones.length; i++) {
-        var r = zones[i].getBoundingClientRect();
-        var t = snap(Math.max(0, Math.min(h, r.top))), b = snap(Math.max(0, Math.min(h, r.bottom)));
-        if (b > t) { clip = 'inset(' + t + 'px 0 ' + (h - b) + 'px 0)'; break; }
-      }
-      // nada escuro atrás: esconde a camada escura de vez, em vez de recortar até zero
-      dark.style.visibility = clip ? 'visible' : 'hidden';
-      if (clip) dark.style.clipPath = clip;
-    }
-    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    function update() { document.documentElement.style.setProperty('--header-h', wrap.getBoundingClientRect().height + 'px'); }
     window.addEventListener('resize', update);
     update();
+  });
+
+
+  // Fotos em .media-fit: a foto fica inteira (contain) e o espaço que sobra é preenchido com as cores
+  // da própria borda dela. Foto mais estreita que a caixa: usa as colunas da esquerda/direita.
+  // Foto mais larga (ex.: embalagens): usa a primeira e a última linha para construir o topo e a base.
+  document.addEventListener('DOMContentLoaded', function () {
+    [].forEach.call(document.querySelectorAll('.media-fit .ds-feature > .ds-media img'), function (img) {
+      var N = 16, d = null; // foto reduzida a 16x16: cada pixel já é a média de uma região
+      function read() {
+        var c = document.createElement('canvas'); c.width = N; c.height = N;
+        var ctx = c.getContext('2d');
+        try { ctx.drawImage(img, 0, 0, N, N); d = ctx.getImageData(0, 0, N, N).data; }
+        catch (e) { d = null; } // imagem de outro domínio: fica a cor padrão do CSS
+      }
+      function line(dir, fixed, isRow) { // degradê com os pixels de uma linha ou coluna da borda
+        var stops = [];
+        for (var k = 0; k < N; k++) {
+          var i = ((isRow ? fixed * N + k : k * N + fixed)) * 4;
+          stops.push('rgb(' + d[i] + ' ' + d[i + 1] + ' ' + d[i + 2] + ') ' + (k / (N - 1) * 100).toFixed(1) + '%');
+        }
+        return 'linear-gradient(' + dir + ',' + stops.join(',') + ')';
+      }
+      function paint() {
+        if (!d) return;
+        var box = img.parentNode.getBoundingClientRect();
+        var wide = img.naturalWidth / img.naturalHeight > box.width / box.height;
+        img.parentNode.style.setProperty('--edge-bg', wide
+          ? line('to right', 0, true) + ' top/100% 50.5% no-repeat,' + line('to right', N - 1, true) + ' bottom/100% 50.5% no-repeat'
+          : line('to bottom', 0, false) + ' left/50.5% 100% no-repeat,' + line('to bottom', N - 1, false) + ' right/50.5% 100% no-repeat');
+      }
+      function start() { read(); paint(); window.addEventListener('resize', paint); }
+      if (img.complete && img.naturalWidth) start(); else img.addEventListener('load', start);
+    });
+  });
+
+  // Galeria da página de compra: miniatura leva à foto; arrastar a foto marca a miniatura certa.
+  document.addEventListener('DOMContentLoaded', function () {
+    var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    [].forEach.call(document.querySelectorAll('[data-gallery]'), function (g) {
+      var track = g.querySelector('.gallery__track');
+      var thumbs = [].slice.call(g.querySelectorAll('.gallery__thumb'));
+      function mark(i) { thumbs.forEach(function (t, k) { if (k === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); }); }
+      thumbs.forEach(function (t, i) {
+        t.addEventListener('click', function () { track.scrollTo({ left: i * track.clientWidth, behavior: smooth ? 'smooth' : 'auto' }); mark(i); });
+      });
+      track.addEventListener('scroll', function () { mark(Math.round(track.scrollLeft / track.clientWidth)); }, { passive: true });
+    });
+  });
+
+  // Linha que arrasta (.rail): setas andam um cartão por vez e apagam quando chega no fim.
+  document.addEventListener('DOMContentLoaded', function () {
+    var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    [].forEach.call(document.querySelectorAll('.rail'), function (rail) {
+      var grid = rail.querySelector('.site-grid--rail');
+      var prev = rail.querySelector('[data-rail="prev"]');
+      var next = rail.querySelector('[data-rail="next"]');
+      if (!grid || !prev || !next) return;
+      function step(dir) {
+        var card = grid.firstElementChild;
+        var gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+        grid.scrollBy({ left: dir * (card ? card.getBoundingClientRect().width + gap : grid.clientWidth), behavior: smooth ? 'smooth' : 'auto' });
+      }
+      function update() {
+        var max = grid.scrollWidth - grid.clientWidth;
+        prev.disabled = grid.scrollLeft <= 1;
+        next.disabled = grid.scrollLeft >= max - 1;
+        rail.classList.toggle('rail--fits', max <= 1);
+      }
+      prev.addEventListener('click', function () { step(-1); });
+      next.addEventListener('click', function () { step(1); });
+      grid.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
   });
 
   // Revelar ao rolar: o título entra palavra por palavra; quando termina, o resto do bloco
@@ -107,4 +174,5 @@
     });
     check();
   });
+
 })();

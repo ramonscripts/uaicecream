@@ -1,5 +1,15 @@
 {
-  "preco": 10.9,
+  "precoLojista": 6.9,
+  "precoSugerido": 10.9,
+  "caixa": 20,
+  "pedidoMinimo": 2,
+  "tiposDeLoja": [
+    "produtos naturais",
+    "suplementos",
+    "empório",
+    "cafeteria",
+    "academia"
+  ],
   "cidades": [
     "Uberaba",
     "Uberlândia"
@@ -10,16 +20,118 @@
       "texto": "porção individual"
     },
     {
-      "titulo": "cerca de 8 g",
+      "titulo": "8 g",
       "texto": "de proteína"
     },
     {
-      "titulo": "cerca de 3 g",
+      "titulo": "3 g",
       "texto": "de fibras"
     },
     {
       "titulo": "até 120 kcal",
       "texto": "sem adição de açúcar"
     }
+  ],
+  "pontos": [
+    {
+      "cidade": "Uberaba",
+      "lugares": [
+        {
+          "nome": "Empório Salutare",
+          "tipo": "produtos naturais, suplementos e cafeteria",
+          "endereco": "R. Medalha Milagrosa, 397, Irmãos Soares"
+        },
+        {
+          "nome": "Loja SôVita",
+          "tipo": "suplementos e naturais funcionais",
+          "endereco": "Av. Leopoldino de Oliveira, 1587, Boulevard Mall"
+        },
+        {
+          "nome": "Empório das Ervas",
+          "tipo": "produtos naturais",
+          "endereco": "R. São Benedito, 614"
+        },
+        {
+          "nome": "Casa das Ervas",
+          "tipo": "produtos naturais",
+          "endereco": "Av. Leopoldino de Oliveira, 3899"
+        },
+        {
+          "nome": "Cantinho da Natureza",
+          "tipo": "produtos naturais",
+          "endereco": "bairro Pacaembu"
+        },
+        {
+          "nome": "Power Up Suplementos e Fitness",
+          "tipo": "suplementos",
+          "endereco": "R. Goiás, Santa Maria"
+        },
+        {
+          "nome": "NutriShop Suplementos",
+          "tipo": "suplementos",
+          "endereco": "R. Vigário Silva, 120, Centro"
+        },
+        {
+          "nome": "Natural Ervas",
+          "tipo": "produtos naturais",
+          "endereco": "R. Vigário Silva, 175, Centro"
+        },
+        {
+          "nome": "A Dietíssima",
+          "tipo": "produtos diet e naturais",
+          "endereco": "R. Vigário Silva, 96, Centro"
+        },
+        {
+          "nome": "Sansoy Alimentos Funcionais",
+          "tipo": "alimentos funcionais",
+          "endereco": "R. Mônaco, 176"
+        }
+      ]
+    },
+    {
+      "cidade": "Uberlândia",
+      "lugares": [
+        {
+          "nome": "Mãe Natureza",
+          "tipo": "produtos naturais",
+          "endereco": "R. Princesa Isabel, Fundinho"
+        },
+        {
+          "nome": "Nutrição Inteligente",
+          "tipo": "produtos naturais e suplementos",
+          "endereco": "R. Rafael Marino Neto, 120, Jardim Karaíba"
+        },
+        {
+          "nome": "Empório Saúde da Terra",
+          "tipo": "empório a granel",
+          "endereco": "Av. Getúlio Vargas, 1315, Centro"
+        },
+        {
+          "nome": "Empório dos Chás",
+          "tipo": "suplementos e moda fitness",
+          "endereco": "R. Arthur Bernardes, 554, Martins"
+        },
+        {
+          "nome": "Empório Natureba",
+          "tipo": "produtos naturais e orgânicos",
+          "endereco": "R. José Abdulmassih, 579, Shopping Park"
+        },
+        {
+          "nome": "Pro Bono Produtos Naturais",
+          "tipo": "produtos naturais",
+          "endereco": "Av. Belarmino Cotta Pacheco, 969"
+        },
+        {
+          "nome": "Vida Saudável",
+          "tipo": "produtos naturais e suplementos",
+          "endereco": "Av. Getúlio Vargas, 592"
+        }
+      ]
+    }
+  ],
+  "emBreve": [
+    "Araxá",
+    "Araguari",
+    "Ituiutaba"
   ]
 }

@@ -1,0 +1,46 @@
+---
+// Onde encontrar: cada cidade abre e fecha (details) e mostra os lugares dela em cartões.
+import Intro from './Intro.astro';
+import Icon from './Icon.astro';
+import { pontos, emBreve } from '../data/site.js';
+---
+<div class="pontos" id="onde-encontrar">
+  <Intro label="onde encontrar" title="veja onde está o uaice fit mais próximo de você">
+    <p class="t-small">Demonstração: as lojas abaixo existem, mas ainda não vendem a uaice fit.</p>
+  </Intro>
+  {pontos.map(({ cidade, lugares }) => (
+    <details class="pontos__cidade">
+      <summary class="pontos__sum">
+        <Icon name="onde-comprar" size={24} />
+        <span class="pontos__nome">{cidade}</span>
+        <span class="t-caption">{lugares.length} lugares</span>
+        <Icon name="abrir" size={24} class="pontos__chev" />
+      </summary>
+      <ul class="pontos__lista">
+        {lugares.map(({ nome, tipo, endereco }) => (
+          <li class="pontos__lugar">
+            <span class="t-body-strong">{nome}</span>
+            <span class="t-small">{tipo}</span>
+            <span class="t-caption">{endereco}</span>
+          </li>
+        ))}
+      </ul>
+    </details>
+  ))}
+  <details class="pontos__cidade">
+    <summary class="pontos__sum">
+      <Icon name="onde-comprar" size={24} />
+      <span class="pontos__nome">em breve</span>
+      <span class="t-caption">{emBreve.length} cidades</span>
+      <Icon name="abrir" size={24} class="pontos__chev" />
+    </summary>
+    <ul class="pontos__lista">
+      {emBreve.map((cidade) => (
+        <li class="pontos__lugar">
+          <span class="t-body-strong">{cidade}</span>
+          <span class="t-small">em breve nas lojas da cidade</span>
+        </li>
+      ))}
+    </ul>
+  </details>
+</div>
