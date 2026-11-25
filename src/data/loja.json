@@ -1,0 +1,25 @@
+{
+  "preco": 10.9,
+  "cidades": [
+    "Uberaba",
+    "Uberlândia"
+  ],
+  "ficha": [
+    {
+      "titulo": "60 g",
+      "texto": "porção individual"
+    },
+    {
+      "titulo": "cerca de 8 g",
+      "texto": "de proteína"
+    },
+    {
+      "titulo": "cerca de 3 g",
+      "texto": "de fibras"
+    },
+    {
+      "titulo": "até 120 kcal",
+      "texto": "sem adição de açúcar"
+    }
+  ]
+}

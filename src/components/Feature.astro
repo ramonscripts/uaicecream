@@ -1,0 +1,18 @@
+---
+import ArrowLink from './ArrowLink.astro';
+import Media from './Media.astro';
+// label: rótulo pequeno acima do título. Use o slot "top" para pôr uma Tag no lugar.
+const { title, body, label, cta, href, reverse = false, image, alt } = Astro.props;
+---
+<article class:list={['ds-feature', { 'ds-feature--rev': reverse }]}>
+  <div class="ds-feature__text">
+    {label && <span class="t-label">{label}</span>}
+    <slot name="top" />
+    <h2 class="ds-feature__title">{title}</h2>
+    <p class="ds-feature__body">{body}</p>
+    {cta && <ArrowLink href={href}>{cta}</ArrowLink>}
+    <slot />  <!-- ações extras, ex.: um Button -->
+
+  </div>
+  <Media image={image} alt={alt} />
+</article>

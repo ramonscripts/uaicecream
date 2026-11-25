@@ -1,0 +1,5 @@
+---
+// Tag do design system: lime (padrão) ou white (só sobre fundo escuro).
+const { tone = 'lime' } = Astro.props;
+---
+<span class={`ds-tag ds-tag--${tone}`}><slot /></span>

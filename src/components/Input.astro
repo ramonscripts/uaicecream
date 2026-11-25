@@ -1,0 +1,8 @@
+---
+// Input do design system: rótulo em cima, campo com borda ink e cantos radius-md.
+const { label, id, ...rest } = Astro.props;
+---
+<label class="ds-field" for={id}>
+  <span class="ds-field__label">{label}</span>
+  <input id={id} class="ds-input" {...rest} />
+</label>

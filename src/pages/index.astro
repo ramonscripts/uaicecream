@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import Feature from '../components/Feature.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import Cols from '../components/Cols.astro';
+import Rows from '../components/Rows.astro';
+import Intro from '../components/Intro.astro';
+import Logo from '../components/Logo.astro';
+import Button from '../components/Button.astro';
+import Tag from '../components/Tag.astro';
+import { sabores } from '../data/site.js';
+const [chefe, ...outros] = sabores;
+// Foto da capa: coloque o arquivo em public/img/ e escreva o caminho aqui, ex.: '/img/capa.jpg'.
+const capa = '';
+---
+<Base title="uaice cream · conheça a nova linha uaice fit" description="Picolé de 60 g com proteína e recheio cremoso, sem adição de açúcar. Nas lojas de nicho do Triângulo Mineiro.">
+
+  <!-- 1. a marca, em uma frase. Capa em tela cheia: foto ao fundo com vidro desfocado por cima -->
+  <Section tone="dark" class="site-cover" stack={false}>
+    <Fragment slot="bg">
+      {capa && <div class="site-cover__photo" style={`background-image:url('${capa}')`}></div>}
+      {capa && <div class="site-cover__glass"></div>}
+    </Fragment>
+    <Hero title="sorvete com jeito mineiro e cabeça fit" lead="A uaice cream junta o uai de Minas com o ice cream. Fazemos picolés com sabor de sorveteria, do tamanho certo para quem passou a comer menos.">
+      <Logo slot="top" line="cream" tone="dark" />
+      <div class="site-actions">
+        <Button href="#uaice-fit">conhecer a uaice fit</Button>
+        <Button href="/comprar" variant="secondary">ir para a loja</Button>
+      </div>
+    </Hero>
+  </Section>
+
+  <!-- 2. a nova linha -->
+  <Section id="uaice-fit" stack={false}>
+    <Feature
+      title="uaice fit: pequeno no tamanho, cheio de recheio"
+      body="A nova linha da uaice cream é um picolé de 60 g com base de iogurte proteico e recheio cremoso por dentro, sem adição de açúcar. É para quem ainda quer um doce no dia sem sair da dieta."
+      cta="ver os sabores" href="#sabores">
+      <Tag slot="top">lançamento</Tag>
+    </Feature>
+  </Section>
+
+  <!-- 3. o diferencial -->
+  <Section id="diferencial">
+    <Intro label="o diferencial" title="sabor de sorveteria, sem cara de suplemento">
+      <p>Os picolés proteicos do mercado parecem suplemento, e o pote facilita comer demais. A uaice fit é uma porção só, com recheio que aparece na primeira mordida.</p>
+    </Intro>
+    <Cols items={[
+      ['60 g', 'Porção individual, sem pote para exagerar.'],
+      ['cerca de 8 g', 'de proteína, com base de iogurte proteico.'],
+      ['recheio cremoso', 'Por dentro de todos os sabores.'],
+      ['até 120 kcal', 'Sem adição de açúcar e com cerca de 3 g de fibras.'],
+    ]} />
+  </Section>
+
+  <!-- 4. os produtos: carro-chefe primeiro, depois a linha -->
+  <Section id="sabores">
+    <Feature reverse
+      title={chefe.name}
+      body="Goiabada com creme de queijo doce, uma das combinações mais ligadas a Minas, no recheio de um picolé de iogurte proteico. O recheio aparece logo na primeira mordida."
+      cta="conhecer o carro-chefe" href={`/sabores/${chefe.id}`} image={chefe.image} alt={chefe.name}>
+      <Tag slot="top">carro-chefe</Tag>
+    </Feature>
+    <Intro label="a linha completa" title="mais cinco sabores para escolher">
+      <p>Todos com 60 g e recheio cremoso por dentro.</p>
+    </Intro>
+    <div class="site-grid">
+      {outros.map((s) => <ProfileCard name={s.name} cta="ver sabor" href={`/sabores/${s.id}`} image={s.image} alt={s.name} />)}
+    </div>
+  </Section>
+
+  <!-- 5. no dia a dia -->
+  <Section id="dia-a-dia">
+    <Intro label="no seu dia" title="dá para comer menos e continuar comendo doce">
+      <p>Para quem está se cuidando e também para quem não está de dieta.</p>
+    </Intro>
+    <Cols cols={3} items={[
+      ['no meio da tarde', 'Um doce pequeno na hora em que a vontade aparece.'],
+      ['depois do treino', 'Gelado e com proteína, mas com gosto de sobremesa.'],
+      ['depois do almoço', 'Uma sobremesa de 60 g, sem pote para repetir.'],
+    ]} />
+  </Section>
+
+  <!-- 6. onde comprar -->
+  <Section id="onde-comprar">
+    <Feature label="onde comprar" title="no freezer da sua loja favorita"
+      body="A uaice fit está nas lojas de produtos naturais, de suplementos, empórios saudáveis, cafeterias e academias. Procure o freezer da uaice no balcão." />
+    <Rows items={[
+      ['agora', 'Uberaba e Uberlândia.'],
+      ['em breve', 'Araxá, Araguari e Ituiutaba.'],
+    ]} />
+  </Section>
+
+  <!-- 7. chamada final -->
+  <Section stack={false}>
+    <Hero as="h2" title="pronto para provar?" lead="Monte seu pedido com os seis sabores da linha uaice fit.">
+      <div class="site-actions"><Button href="/comprar" variant="secondary">montar meu pedido</Button></div>
+    </Hero>
+  </Section>
+</Base>

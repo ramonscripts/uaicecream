@@ -1,0 +1,71 @@
+---
+// Página de compra de um sabor: escolhe a quantidade e põe no carrinho ou compra direto.
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import Media from '../../components/Media.astro';
+import Tag from '../../components/Tag.astro';
+import Button from '../../components/Button.astro';
+import Qty from '../../components/Qty.astro';
+import { sabores, PRICE, brl } from '../../data/site.js';
+
+export function getStaticPaths() {
+  return sabores.map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+const { s } = Astro.props;
+---
+<Base title={`comprar ${s.name} · uaice fit`} description={s.desc}>
+  <Section>
+    <div class="buy" data-product={s.id}>
+      <Media image={s.image} alt={s.name} />
+      <div class="ds-card">
+        <div class="product-tags">
+          <Tag>uaice fit</Tag>
+          {s.tags.map((t) => <Tag>{t}</Tag>)}
+        </div>
+        <h1 class="t-title">{s.name}</h1>
+        <p>{s.desc}</p>
+        <p class="t-heading">{brl(PRICE)} <span class="t-small">a unidade de 60 g</span></p>
+        <Qty name={s.name} />
+        <div class="buy-actions">
+          <Button data-add>adicionar ao carrinho</Button>
+          <Button variant="secondary" data-buy-now>comprar agora</Button>
+        </div>
+        <p class="t-small" role="status" data-status></p>
+        <a class="ds-link ds-link--light t-body-strong" href={`/sabores/${s.id}`}>ver detalhes do sabor</a>
+      </div>
+    </div>
+  </Section>
+</Base>
+
+<script>
+  import { add, MAX } from '../../scripts/cart.js';
+
+  const root = document.querySelector('[data-product]');
+  const id = root.dataset.product;
+  const valueEl = root.querySelector('[data-qty-value]');
+  const status = root.querySelector('[data-status]');
+  let q = 1;
+
+  root.addEventListener('click', (e) => {
+    const step = e.target.closest('[data-step]');
+    if (step) {
+      q = Math.min(MAX, Math.max(1, q + Number(step.dataset.step)));
+      valueEl.textContent = String(q);
+      return;
+    }
+    if (e.target.closest('[data-add]')) {
+      add(id, q);
+      status.replaceChildren(`${q} ${q > 1 ? 'picolés adicionados' : 'picolé adicionado'} ao carrinho. `);
+      const link = document.createElement('a');
+      link.href = '/carrinho';
+      link.className = 'ds-link ds-link--light';
+      link.textContent = 'ver carrinho';
+      status.append(link);
+      return;
+    }
+    if (e.target.closest('[data-buy-now]')) {
+      add(id, q);
+      window.location.href = '/checkout';
+    }
+  });
+</script>

@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import Feature from '../components/Feature.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import Cols from '../components/Cols.astro';
+import Rows from '../components/Rows.astro';
+import Intro from '../components/Intro.astro';
+import Logo from '../components/Logo.astro';
+import Button from '../components/Button.astro';
+import Qr from '../components/Qr.astro';
+import { equipe } from '../data/site.js';
+---
+<Base title="planejamento · uaice fit" description="Planejamento de marketing da linha uaice fit, feito pela Consultoria Raiz.">
+  <Section stack={false}>
+    <Hero title="planejamento de marketing da linha uaice fit" lead="Picolés fit recheados da uaice cream, pensados para quem passou a comer menos e ainda quer um doce no dia.">
+      <Logo slot="top" line="fit" />
+      <div class="site-actions">
+        <Button href="/comprar">comprar picolés</Button>
+        <Button href="#produto" variant="secondary">ver o planejamento</Button>
+      </div>
+      <Qr />
+    </Hero>
+  </Section>
+
+  <Section id="produto">
+    <Feature label="o produto" title="pequeno no tamanho, cheio de recheio" cta="ver os sabores" href="/#sabores"
+      body="A uaice fit é a linha de picolés fit recheados da uaice cream: 60 g, base de iogurte proteico e recheio cremoso, sem adição de açúcar. A linha tem um carro-chefe, o Romeu e Julieta, e quatro sabores complementares." />
+    <Cols items={[
+      ['60 g', 'porção individual controlada'],
+      ['cerca de 8 g', 'de proteína por unidade'],
+      ['cerca de 3 g', 'de fibras'],
+      ['até 120 kcal', 'por unidade'],
+    ]} />
+    <p class="t-caption">Metas de desenvolvimento, que dependem de testes de formulação e validação nutricional. Alegações no rótulo seguem a RDC nº 429/2020 e a IN nº 75/2020 da Anvisa.</p>
+  </Section>
+
+  <Section id="mercado">
+    <Feature reverse label="análise situacional" title="as pessoas estão comendo menos doce"
+      body="Com a popularização das canetas emagrecedoras, muita gente cortou doces e passou a buscar proteína. Quem come menos precisa que cada refeição traga mais nutrientes, e a uaice cream leva isso para a sobremesa." />
+    <Cols items={[
+      ['33%', 'dos domicílios brasileiros tinham, em fevereiro de 2026, alguém que usa ou já usou canetas emagrecedoras, contra 26% no fim de 2025.'],
+      ['95%', 'desses domicílios reduziram o consumo de ao menos uma categoria de alimentos.'],
+      ['70%', 'diminuíram o consumo de doces, snacks e salgadinhos.'],
+      ['+9,1%', 'de alta projetada para os suplementos proteicos, enquanto chocolates, biscoitos e balas caem.'],
+    ]} />
+    <p class="t-caption">Fontes: Instituto Locomotiva/ICTQ; Scanntech; consenso de sociedades médicas e de nutrição dos EUA sobre medicamentos GLP-1.</p>
+  </Section>
+
+  <Section id="concorrencia">
+    <Feature label="concorrência" title="o sabor do artesanal com a proteína do fitness"
+      body="Picolés e sorvetes proteicos já existem, como o Piracanjuba ProForce, lançado em 2026 com 10 g de proteína, zero lactose e sem adição de açúcar, cuja distribuição inicial não inclui o Triângulo Mineiro. Na avaliação do grupo, esses produtos seguem o visual de suplemento, e o pote facilita comer mais de uma porção. A uaice cream junta o sabor e o recheio do picolé artesanal com a proteína e o pouco açúcar dos produtos fitness." />
+    <div class="stack-sm">
+      <span class="t-label">análise swot</span>
+      <Cols items={[
+        ['forças', 'Porção individual pequena e controlada. Recheio cremoso, que diferencia de picolés proteicos comuns. Identidade mineira e sabores regionais. Venda em lojas que já atendem o público fit.'],
+        ['fraquezas', 'Marca nova e desconhecida. Custo maior de ingredientes proteicos. Dependência da cadeia de frio no transporte e nas lojas. Volume de produção inicial pequeno.'],
+        ['oportunidades', 'Crescimento do uso de canetas emagrecedoras. Alta na procura por produtos proteicos. Lojas de nicho buscando produtos diferentes para o freezer. Poucas marcas regionais no segmento.'],
+        ['ameaças', 'Queda geral no consumo de doces. Grandes marcas lançando picolés proteicos. Variação de preço do leite e das proteínas. Regras da Anvisa para alegações nutricionais no rótulo.'],
+      ]} />
+    </div>
+  </Section>
+
+  <Section id="publico" stack={false}>
+    <Feature reverse label="público-alvo" title="para quem está se cuidando e não quer largar o doce"
+      body="Adultos de 25 a 50 anos, das classes B- e C+, moradores das cidades-polo do Triângulo Mineiro, que estão emagrecendo com canetas, dieta ou academia. Compram em lojas de produtos naturais e de suplementos, frequentam academia e cafeterias saudáveis e consomem o picolé no meio da tarde, depois do treino ou como sobremesa após o almoço." />
+  </Section>
+
+  <Section id="metas">
+    <Intro label="objetivos e metas" title="metas para os primeiros seis meses" />
+    <Cols cols={2} items={[
+      ['30 pontos de venda', 'ativos no Triângulo Mineiro até o fim do sexto mês, para colocar a marca nas lojas de nicho.'],
+      ['9.000 unidades', 'vendidas nos primeiros seis meses, com o carro-chefe respondendo por cerca de 40% das vendas.'],
+    ]} />
+    <div class="stack-sm">
+      <span class="t-label">estratégias dos 4 ps</span>
+      <Cols items={[
+        ['produto', 'Porção pequena, proteína e recheio, com um carro-chefe mineiro e quatro sabores complementares que o público já conhece.'],
+        ['preço', 'Preço de valor percebido, acima do picolé comum por ser um produto diferenciado.'],
+        ['praça', 'Distribuição seletiva em lojas de nicho, sem loja própria, com freezer em comodato.'],
+        ['promoção', 'Redes sociais focadas no recheio e na porção certa, com degustação nos pontos de venda.'],
+      ]} />
+    </div>
+  </Section>
+
+  <Section id="logistica">
+    <Feature label="planos de ação" title="preço e como o picolé chega ao freezer"
+      body="A uaice cream não terá loja própria. Os picolés vão só para lojas de nicho: produtos naturais, suplementos, empórios saudáveis, cafeterias e academias. Cada ponto recebe um freezer pequeno em comodato, com a identidade visual da marca." />
+    <div class="stack-sm">
+      <Cols cols={3} items={[
+        ['R$ 10,90', 'preço sugerido ao consumidor, por unidade de 60 g'],
+        ['R$ 6,90', 'preço de venda ao lojista'],
+        ['R$ 4,00', 'de margem por unidade para o lojista'],
+      ]} />
+      <p class="t-caption">O valor fica acima de um picolé artesanal comum. O preço é uma estimativa, e não um cálculo contábil definitivo.</p>
+    </div>
+    <div class="stack-sm">
+      <span class="t-label">expansão no triângulo mineiro</span>
+      <Rows items={[
+        ['lançamento', 'Uberaba e Uberlândia, as duas maiores cidades.'],
+        ['mês 4', 'Expansão para Araxá, Araguari e Ituiutaba.'],
+        ['depois do semestre', 'Expansão para outras regiões.'],
+        ['reposição', 'Pedidos pelo WhatsApp Business, com entrega semanal em veículo refrigerado.'],
+      ]} />
+    </div>
+  </Section>
+
+  <Section id="promocao">
+    <Feature reverse label="promoção" title="dá para comer menos e continuar comendo doce"
+      body="A mensagem vale para uma porção pequena, com proteína e bastante recheio. A comunicação não promete emagrecimento nem cita medicamentos: a Anvisa proíbe que o rótulo de um alimento indique propriedades medicinais, e o picolé também é para quem não está de dieta." />
+    <Cols cols={3} items={[
+      ['instagram', 'Visual e muito usado pelo público fitness e pelas lojas parceiras.'],
+      ['tiktok', 'Vídeos curtos do picolé sendo mordido e do recheio aparecendo.'],
+      ['whatsapp business', 'Relacionamento com os lojistas.'],
+    ]} />
+  </Section>
+
+  <Section id="monitoramento">
+    <Intro label="monitoramento e controle" title="como o grupo acompanha os resultados">
+      <p>O acompanhamento é mensal e usa os mesmos números das metas.</p>
+    </Intro>
+    <Rows items={[
+      ['pontos de venda ativos', 'Comparados aos 30 previstos para o sexto mês.'],
+      ['unidades vendidas por sabor', 'Comparadas às 9.000 previstas para o semestre, com atenção ao desempenho do carro-chefe.'],
+      ['pedidos de reposição', 'Frequência registrada pelo WhatsApp Business.'],
+      ['cadeia de frio', 'Perdas por falha na refrigeração.'],
+      ['degustações', 'Retorno de lojistas e consumidores.'],
+      ['ajustes', 'Se um sabor vender bem abaixo dos demais ou um ponto de venda não girar o estoque, o grupo ajusta o mix de sabores ou a ação promocional daquele local.'],
+    ]} />
+  </Section>
+
+  <Section id="equipe">
+    <Intro label="equipe" title="consultoria raiz">
+      <p>Grupo da Universidade de Uberaba que montou este planejamento para lançar a uaice fit nas lojas de nicho do Triângulo Mineiro.</p>
+    </Intro>
+    <div class="site-grid">
+      {equipe.map((m) => <ProfileCard name={m.name} cta={m.role} caption={`RA ${m.ra}`} image={m.image} alt={m.name} />)}
+    </div>
+  </Section>
+</Base>

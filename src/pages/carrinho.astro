@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import Button from '../components/Button.astro';
+---
+<Base title="carrinho · uaice fit">
+  <Section>
+    <Hero title="seu carrinho" />
+    <div class="shop">
+      <div class="stack-sm" id="cart-lines"></div>
+      <aside class="order" id="cart-summary" aria-label="resumo do pedido" hidden>
+        <div class="ds-card">
+          <h2 class="t-heading-sm">resumo</h2>
+          <div class="order-total"><span class="t-small">itens</span><span class="t-body-strong" id="cart-count">0</span></div>
+          <div class="order-total"><span class="t-body-strong">total</span><span class="t-heading-sm" id="cart-total"></span></div>
+          <Button href="/checkout">finalizar compra</Button>
+          <a class="ds-link ds-link--light t-body-strong" href="/comprar">continuar comprando</a>
+        </div>
+      </aside>
+    </div>
+  </Section>
+</Base>
+
+<script>
+  import { lines, setQty, count, total, MAX } from '../scripts/cart.js';
+  import { PRICE, brl } from '../data/site.js';
+
+  const list = document.getElementById('cart-lines');
+  const summary = document.getElementById('cart-summary');
+
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function textBtn(label, aria, data) {
+    const b = el('button', 'ds-btn ds-btn--text ds-link ds-link--light', label);
+    b.type = 'button'; b.setAttribute('aria-label', aria); Object.assign(b.dataset, data);
+    return b;
+  }
+
+  function render() {
+    const items = lines();
+    list.replaceChildren();
+    summary.hidden = items.length === 0;
+    if (!items.length) {
+      const card = el('div', 'ds-card cart-empty');
+      const go = el('a', 'ds-btn ds-btn--secondary', 'ver a loja'); go.href = '/comprar';
+      card.append(el('p', 't-heading-sm', 'seu carrinho está vazio'), el('p', 't-small', 'Escolha um sabor na loja para começar.'), go);
+      list.append(card);
+      return;
+    }
+    for (const it of items) {
+      const card = el('article', 'ds-card cart-line');
+      const info = el('div', 'stack-sm cart-info');
+      const name = el('a', 'ds-link ds-link--light t-heading-sm', it.name); name.href = `/comprar/${it.id}`;
+      info.append(name, el('span', 't-small', `${brl(PRICE)} cada`));
+      const qty = el('div', 'qty');
+      qty.setAttribute('role', 'group'); qty.setAttribute('aria-label', `quantidade de ${it.name}`);
+      qty.append(
+        textBtn('−', `menos um ${it.name}`, { id: it.id, q: String(it.q - 1) }),
+        el('span', 't-body-strong', String(it.q)),
+        textBtn('+', `mais um ${it.name}`, { id: it.id, q: String(Math.min(MAX, it.q + 1)) }),
+      );
+      const end = el('div', 'cart-end');
+      end.append(el('span', 't-body-strong', brl(it.subtotal)), textBtn('remover', `remover ${it.name}`, { id: it.id, q: '0' }));
+      card.append(info, qty, end);
+      list.append(card);
+    }
+    document.getElementById('cart-count').textContent = String(count());
+    document.getElementById('cart-total').textContent = brl(total());
+  }
+
+  list.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-id]');
+    if (b) setQty(b.dataset.id, Number(b.dataset.q));
+  });
+  window.addEventListener('cart:change', render);
+  window.addEventListener('storage', render);
+  render();
+</script>

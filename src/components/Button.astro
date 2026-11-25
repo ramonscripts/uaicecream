@@ -1,0 +1,6 @@
+---
+// Button do design system. Com href vira link com cara de botão. Use um primary por página.
+const { variant = 'primary', href, ...rest } = Astro.props;
+const El = href ? 'a' : 'button';
+---
+<El class={`ds-btn ds-btn--${variant}`} href={href} type={href ? undefined : 'button'} {...rest}><slot /></El>

@@ -1,0 +1,9 @@
+---
+// RowList do design system. items: [[título, texto], ...]
+const { items } = Astro.props;
+---
+<div class="ds-rows">
+  {items.map(([title, body]) => (
+    <div class="ds-rows__row"><h3 class="ds-rows__title">{title}</h3><p class="ds-rows__body">{body}</p></div>
+  ))}
+</div>

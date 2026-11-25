@@ -1,0 +1,32 @@
+---
+// Loja: lista os sabores e leva para a página de compra de cada um.
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import Hero from '../../components/Hero.astro';
+import Media from '../../components/Media.astro';
+import Tag from '../../components/Tag.astro';
+import Button from '../../components/Button.astro';
+import { sabores, PRICE, brl } from '../../data/site.js';
+---
+<Base title="loja · uaice fit">
+  <Section>
+    <Hero title="escolha seu sabor" lead="Seis sabores de 60 g, todos com recheio cremoso. Se não souber por onde começar, vá de Romeu e Julieta, o carro-chefe. Esta loja é uma demonstração e não cobra nada." />
+    <div class="site-grid">
+      {sabores.map((s) => (
+        <article class="product" id={s.id}>
+          <div class="ds-card">
+            <a href={`/comprar/${s.id}`} tabindex="-1" aria-hidden="true" class="product-media"><Media image={s.image} alt="" /></a>
+            {s.tags.length > 0 && <div class="product-tags">{s.tags.map((t) => <Tag>{t}</Tag>)}</div>}
+            <h2 class="t-heading-sm">{s.name}</h2>
+            <p class="t-small">{s.desc}</p>
+            <a class="ds-link ds-link--light t-caption" href={`/sabores/${s.id}`}>ver detalhes</a>
+            <div class="product-foot">
+              <span class="t-body-strong">{brl(PRICE)}</span>
+              <Button variant="secondary" href={`/comprar/${s.id}`} aria-label={`comprar ${s.name}`}>comprar</Button>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </Section>
+</Base>

@@ -1,0 +1,11 @@
+---
+// Logo do design system. tone="light" sobre fundo claro, tone="dark" sobre fundo escuro.
+const { line = 'cream', tone = 'light', size = 48, decorative = false } = Astro.props;
+---
+<span
+  class:list={['ds-logo', `ds-logo--${tone}`, `ds-logo--${line}`]}
+  style={`font-size:${size}px`}
+  role={decorative ? undefined : 'img'}
+  aria-label={decorative ? undefined : `uaice ${line}`}
+  aria-hidden={decorative ? 'true' : undefined}
+><span class="ds-logo__word" aria-hidden="true"><b>uai</b><i>ce</i></span><span class="ds-logo__pill" aria-hidden="true">{line}</span></span>

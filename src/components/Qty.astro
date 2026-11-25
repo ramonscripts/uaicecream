@@ -1,0 +1,10 @@
+---
+// Seletor de quantidade (− n +) com botões de texto do design system.
+// O script da página escuta [data-step] e atualiza [data-qty-value].
+const { name, value = 1 } = Astro.props;
+---
+<div class="qty" role="group" aria-label={`quantidade de ${name}`}>
+  <button class="ds-btn ds-btn--text ds-link ds-link--light" type="button" data-step="-1" aria-label={`menos um ${name}`}>−</button>
+  <span class="t-body-strong" data-qty-value aria-live="polite">{value}</span>
+  <button class="ds-btn ds-btn--text ds-link ds-link--light" type="button" data-step="1" aria-label={`mais um ${name}`}>+</button>
+</div>

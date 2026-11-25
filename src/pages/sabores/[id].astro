@@ -1,0 +1,42 @@
+---
+// Página de detalhes de um sabor. Leva para a página de compra do mesmo sabor.
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import Feature from '../../components/Feature.astro';
+import ProfileCard from '../../components/ProfileCard.astro';
+import Cols from '../../components/Cols.astro';
+import Intro from '../../components/Intro.astro';
+import Button from '../../components/Button.astro';
+import Tag from '../../components/Tag.astro';
+import { sabores, ficha } from '../../data/site.js';
+
+export function getStaticPaths() {
+  return sabores.map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+const { s } = Astro.props;
+const outros = sabores.filter((o) => o.id !== s.id);
+---
+<Base title={`${s.name} · uaice fit`} description={s.desc}>
+  <Section>
+    <Feature title={s.name} body={s.about} image={s.image} alt={s.name}>
+      <div slot="top" class="product-tags">
+        <Tag>uaice fit</Tag>
+        {s.tags.map((t) => <Tag>{t}</Tag>)}
+      </div>
+      <div class="site-actions site-actions--start">
+        <Button href={`/comprar/${s.id}`}>comprar este sabor</Button>
+      </div>
+    </Feature>
+    <div class="stack-sm">
+      <span class="t-label">em cada picolé</span>
+      <Cols items={ficha} />
+    </div>
+  </Section>
+
+  <Section>
+    <Intro label="outros sabores" title="experimente também" />
+    <div class="site-grid">
+      {outros.map((o) => <ProfileCard name={o.name} cta="ver sabor" href={`/sabores/${o.id}`} image={o.image} alt={o.name} />)}
+    </div>
+  </Section>
+</Base>

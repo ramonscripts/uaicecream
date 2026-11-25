@@ -1,0 +1,20 @@
+---
+import Media from './Media.astro';
+// Com href vira link com seta; sem href é só um cartão (ex.: equipe).
+const { name, cta, href, caption, image, alt } = Astro.props;
+const El = href ? 'a' : 'div';
+---
+<El class="ds-profile" href={href}>
+  <Media image={image} alt={alt} />
+  <span class="ds-profile__shade"></span>
+  <span class="ds-profile__txt">
+    <span class="ds-profile__name">{name}</span>
+    {href ? (
+      <span class="ds-arrow ds-arrow--on-img">
+        <span class="ds-arrow__dot" aria-hidden="true"><svg width="16" height="16"><use href="#arrow" /></svg></span>
+        <span class="ds-arrow__label">{cta}</span>
+      </span>
+    ) : <span class="ds-arrow__label">{cta}</span>}
+    {caption && <span class="t-caption">{caption}</span>}
+  </span>
+</El>

@@ -1,0 +1,25 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const { title, description = 'Picolé de 60 g com proteína e recheio cremoso, sem adição de açúcar.' } = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="stylesheet" href="/styles.css">
+  <script is:inline src="/site.js"></script>
+</head>
+<body>
+  <!-- ícone de seta reutilizado pelas páginas: <use href="#arrow"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+  <Header />
+  <main><slot /></main>
+  <Footer />
+</body>
+</html>

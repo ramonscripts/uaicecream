@@ -1,0 +1,9 @@
+---
+// Espaço de imagem do design system (cantos de 16px).
+// Sem `image`, fica só o espaço reservado. Com `image`, mostra a foto cobrindo o espaço.
+// Coloque as fotos em public/img/ e passe image="/img/arquivo.jpg" e um alt descrevendo a foto.
+const { image, alt = '', class: cls } = Astro.props;
+---
+<div class:list={['ds-media', cls]} aria-hidden={image ? undefined : 'true'}>
+  {image && <img src={image} alt={alt} loading="lazy" decoding="async" />}
+</div>

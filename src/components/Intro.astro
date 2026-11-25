@@ -1,0 +1,9 @@
+---
+// Rótulo + título de seção, com texto opcional no slot.
+const { label, title } = Astro.props;
+---
+<div class="intro">
+  {label && <span class="t-label">{label}</span>}
+  <h2 class="t-title">{title}</h2>
+  <slot />
+</div>

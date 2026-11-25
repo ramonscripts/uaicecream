@@ -1,0 +1,9 @@
+---
+// Faixa da página. tone="dark" fica forest nos dois temas; sem tone, segue o tema.
+const { tone, id, stack = true, class: cls } = Astro.props;
+const dark = tone === 'dark';
+---
+<section class:list={['ds-section', { 'ds-section--dark': dark }, cls]} data-theme={dark ? 'dark' : undefined} id={id}>
+  <slot name="bg" />
+  <div class:list={['ds-section__in', { stack }]}><slot /></div>
+</section>

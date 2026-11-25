@@ -1,0 +1,119 @@
+---
+// Compra simulada, sem conta: os dados do formulário não saem do navegador e não são salvos.
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import Input from '../components/Input.astro';
+import Button from '../components/Button.astro';
+import { cidades } from '../data/site.js';
+---
+<Base title="finalizar compra · uaice fit">
+  <Section>
+    <Hero title="finalizar compra" lead="Sem cadastro: preencha a entrega e escolha como pagar. É uma compra simulada, nada é cobrado e seus dados não são enviados." />
+
+    <div class="shop" id="checkout">
+      <form class="ds-card checkout-form" id="checkout-form" novalidate>
+        <h2 class="t-heading-sm">entrega</h2>
+        <Input label="nome completo" id="nome" name="nome" autocomplete="name" required />
+        <Input label="e-mail" id="email" name="email" type="email" autocomplete="email" required />
+        <Input label="telefone" id="telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" required />
+        <label class="ds-field" for="cidade">
+          <span class="ds-field__label">cidade</span>
+          <select class="ds-input" id="cidade" name="cidade" required>
+            <option value="">escolha a cidade</option>
+            {cidades.map((c) => <option>{c}</option>)}
+          </select>
+        </label>
+        <Input label="endereço" id="endereco" name="endereco" autocomplete="street-address" required />
+
+        <fieldset>
+          <legend class="ds-field__label">pagamento na entrega</legend>
+          <label class="choice"><input type="radio" name="pagamento" value="pix" required /> pix</label>
+          <label class="choice"><input type="radio" name="pagamento" value="cartão" /> cartão</label>
+          <label class="choice"><input type="radio" name="pagamento" value="dinheiro" /> dinheiro</label>
+        </fieldset>
+
+        <p class="t-small" id="form-error" role="alert"></p>
+        <Button type="submit">confirmar pedido</Button>
+      </form>
+
+      <aside class="order" aria-label="resumo do pedido">
+        <div class="ds-card">
+          <h2 class="t-heading-sm">seu pedido</h2>
+          <div class="order-lines" id="summary-lines"></div>
+          <div class="order-total"><span class="t-body-strong">total</span><span class="t-heading-sm" id="summary-total"></span></div>
+          <a class="ds-link ds-link--light t-body-strong" href="/carrinho">editar carrinho</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="ds-card cart-empty" id="checkout-empty" hidden>
+      <p class="t-heading-sm">seu carrinho está vazio</p>
+      <p class="t-small">Escolha um sabor na loja antes de finalizar.</p>
+      <a class="ds-btn ds-btn--secondary" href="/comprar">ver a loja</a>
+    </div>
+
+    <div class="ds-card cart-empty" id="checkout-done" hidden tabindex="-1">
+      <p class="t-label">pedido confirmado</p>
+      <h2 class="t-title" id="done-title"></h2>
+      <p id="done-text"></p>
+      <div class="order-lines" id="done-lines"></div>
+      <p class="t-caption">Compra simulada: nada foi cobrado e nenhum dado foi enviado.</p>
+      <a class="ds-btn ds-btn--secondary" href="/comprar">voltar para a loja</a>
+    </div>
+  </Section>
+</Base>
+
+<script>
+  import { lines, total, clear } from '../scripts/cart.js';
+  import { brl } from '../data/site.js';
+
+  const form = document.getElementById('checkout-form');
+  const error = document.getElementById('form-error');
+
+  function lineRow(it) {
+    const row = document.createElement('div');
+    row.className = 'order-line';
+    const a = document.createElement('span'); a.className = 't-small'; a.textContent = `${it.q} × ${it.name}`;
+    const b = document.createElement('span'); b.className = 't-body-strong'; b.textContent = brl(it.subtotal);
+    row.append(a, b);
+    return row;
+  }
+
+  function render() {
+    const items = lines();
+    document.getElementById('checkout').hidden = items.length === 0;
+    document.getElementById('checkout-empty').hidden = items.length > 0;
+    document.getElementById('summary-lines').replaceChildren(...items.map(lineRow));
+    document.getElementById('summary-total').textContent = brl(total());
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      const first = form.querySelector(':invalid');
+      error.textContent = 'Confira os campos: todos são obrigatórios e o e-mail precisa ser válido.';
+      first?.focus();
+      return;
+    }
+    error.textContent = '';
+    const items = lines();
+    const data = new FormData(form);
+    const n = items.reduce((s, it) => s + it.q, 0);
+    const code = 'UAI-' + String(crypto.getRandomValues(new Uint32Array(1))[0] % 10000).padStart(4, '0');
+
+    document.getElementById('done-title').textContent = `pedido ${code}`;
+    document.getElementById('done-text').textContent =
+      `Obrigado, ${String(data.get('nome')).trim().split(' ')[0]}. ${n} ${n > 1 ? 'picolés' : 'picolé'} para entrega em ${data.get('cidade')}, pagamento em ${data.get('pagamento')} na entrega. Total: ${brl(total())}.`;
+    document.getElementById('done-lines').replaceChildren(...items.map(lineRow));
+
+    clear();
+    form.reset();
+    document.getElementById('checkout').hidden = true;
+    const done = document.getElementById('checkout-done');
+    done.hidden = false;
+    done.focus();
+  });
+
+  render();
+</script>

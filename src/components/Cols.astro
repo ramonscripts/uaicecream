@@ -1,0 +1,9 @@
+---
+// ColumnGrid do design system. items: [[título, texto], ...]; cols: 2, 3 ou 4.
+const { items, cols = 4 } = Astro.props;
+---
+<div class:list={['ds-cols', { [`ds-cols--${cols}`]: cols !== 4 }]}>
+  {items.map(([title, body]) => (
+    <div class="ds-cols__col"><h3 class="ds-cols__title">{title}</h3><p class="ds-cols__body">{body}</p></div>
+  ))}
+</div>

@@ -1,0 +1,7 @@
+---
+const { href } = Astro.props;
+---
+<a class="ds-arrow" href={href}>
+  <span class="ds-arrow__dot" aria-hidden="true"><svg width="16" height="16"><use href="#arrow" /></svg></span>
+  <span class="ds-link ds-arrow__text"><slot /></span>
+</a>

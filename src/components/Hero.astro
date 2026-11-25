@@ -1,0 +1,10 @@
+---
+// as="h2" quando o Hero não é o título principal da página.
+const { title, lead, as: Tag = 'h1' } = Astro.props;
+---
+<div class="ds-hero">
+  <slot name="top" />
+  <Tag class:list={[Tag === 'h1' ? 'ds-hero__title' : 't-title']}>{title}</Tag>
+  {lead && <p class="ds-hero__lead">{lead}</p>}
+  <slot />
+</div>

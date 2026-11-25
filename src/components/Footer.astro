@@ -1,0 +1,18 @@
+---
+import Logo from './Logo.astro';
+import { footer } from '../data/site.js';
+---
+<footer class="ds-footer">
+  <div class="ds-footer__cols">
+    {footer.map((col) => (
+      <div class="ds-footer__col">
+        <strong>{col.title}</strong>
+        {col.links.map(([href, label]) => <a class="ds-link ds-link--dark" href={href}>{label}</a>)}
+      </div>
+    ))}
+  </div>
+  <div class="ds-footer__base">
+    <Logo tone="dark" size={36} />
+    <span class="ds-footer__copy">© 2026 uaice cream · marca fictícia criada pela Consultoria Raiz para um trabalho da Universidade de Uberaba</span>
+  </div>
+</footer>
