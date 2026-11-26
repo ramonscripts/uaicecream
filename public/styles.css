@@ -5,9 +5,9 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scrollbar-gutter:stable}  /* abrir o menu trava a rolagem sem a página mudar de largura */
-html{background:var(--forest)}  /* área do "puxar para atualizar" e do overscroll fica verde em todas as páginas; o body segue creme */
+html,body{background:var(--forest)}  /* topo do navegador (Safari pinta pela cor do body) e "puxar para atualizar" ficam verdes; cada faixa pinta o próprio fundo creme */
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
-body{margin:0;background:var(--surface);color:var(--ink);font:400 18px/27px var(--font-sans);letter-spacing:-.25px}
+body{margin:0;color:var(--ink);font:400 18px/27px var(--font-sans);letter-spacing:-.25px}
 h1,h2,h3,h4,p{margin:0}
 
 /* seleção de texto da marca: fundo lime (uaice fit) com texto forest */
