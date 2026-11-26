@@ -5,6 +5,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scrollbar-gutter:stable}  /* abrir o menu trava a rolagem sem a página mudar de largura */
+html{background:var(--forest)}  /* área do "puxar para atualizar" e do overscroll fica verde em todas as páginas; o body segue creme */
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
 body{margin:0;background:var(--surface);color:var(--ink);font:400 18px/27px var(--font-sans);letter-spacing:-.25px}
 h1,h2,h3,h4,p{margin:0}
@@ -196,6 +197,14 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
 .gallery__thumb:hover{opacity:1}
 .gallery__thumb[aria-current="true"]{border-color:var(--forest);opacity:1}
 .gallery__thumb:focus-visible{outline:2px solid var(--forest);outline-offset:2px}
+/* computador: o card fica da altura da foto (as miniaturas descem para a linha de baixo, só na coluna da foto) */
+@media (min-width:861px){
+  .buy{row-gap:var(--space-3);align-items:stretch}
+  .buy .gallery{display:contents}
+  .buy .gallery__track{grid-column:1;grid-row:1}
+  .buy .gallery__thumbs{grid-column:1;grid-row:2}
+  .buy > .ds-card{grid-column:2;grid-row:1}
+}
 
 /* carrinho e checkout */
 .cart-line{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:var(--space-4);align-items:center}

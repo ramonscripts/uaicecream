@@ -6,8 +6,8 @@
       "sabor principal",
       "mineiro"
     ],
-    "desc": "Iogurte proteico com recheio cremoso de goiabada com creme de queijo doce, sem adição de açúcar.",
-    "about": "O sabor principal da uaice fit junta goiabada com creme de queijo doce, uma das combinações mais ligadas a Minas Gerais. O recheio fica dentro de uma casquinha de iogurte proteico e aparece logo na primeira mordida."
+    "desc": "Goiabada com creme de queijo doce, sem adição de açúcar.",
+    "about": "O sabor principal da uaice fit: goiabada com creme de queijo doce, combinação clássica de Minas. O recheio fica dentro da casquinha de iogurte proteico e aparece na primeira mordida."
   },
   {
     "id": "doce-de-leite",
@@ -15,29 +15,29 @@
     "tags": [
       "mineiro"
     ],
-    "desc": "Recheio cremoso de doce de leite mineiro, sem adição de açúcar.",
-    "about": "Mais um sabor mineiro: iogurte proteico por fora e recheio cremoso de doce de leite por dentro, sem adição de açúcar."
+    "desc": "Recheio cremoso de doce de leite mineiro.",
+    "about": "Outro sabor mineiro: iogurte proteico por fora e doce de leite cremoso por dentro, sem adição de açúcar."
   },
   {
     "id": "chocolate",
     "name": "chocolate proteico",
     "tags": [],
-    "desc": "Chocolate no picolé e no recheio, o sabor mais comum da linha.",
-    "about": "O sabor mais comum da linha. Chocolate no picolé e no recheio cremoso, com a mesma base de iogurte proteico dos outros sabores."
+    "desc": "Chocolate no picolé e no recheio.",
+    "about": "Chocolate no picolé e no recheio cremoso, com a mesma base de iogurte proteico dos outros sabores."
   },
   {
     "id": "morango",
     "name": "morango com iogurte",
     "tags": [],
-    "desc": "Iogurte com morango, mais leve e cremoso.",
-    "about": "Iogurte com morango, mais leve e cremoso, com recheio de morango por dentro e sem adição de açúcar."
+    "desc": "Iogurte com morango, o mais leve da linha.",
+    "about": "Iogurte com morango e recheio de morango. É o sabor mais leve da linha, sem adição de açúcar."
   },
   {
     "id": "maracuja",
     "name": "maracujá",
     "tags": [],
     "desc": "Recheio de maracujá, cítrico e refrescante.",
-    "about": "Cítrico e refrescante, com recheio cremoso de maracujá sobre a mesma base de iogurte proteico dos outros sabores."
+    "about": "Cítrico e refrescante, com recheio cremoso de maracujá sobre a base de iogurte proteico."
   },
   {
     "id": "coco",
@@ -45,7 +45,7 @@
     "tags": [
       "novidade"
     ],
-    "desc": "Iogurte proteico com recheio cremoso de coco, sem adição de açúcar.",
-    "about": "Coco, um sabor comum em sorveterias: iogurte proteico por fora e recheio cremoso de coco por dentro, sem adição de açúcar."
+    "desc": "Recheio cremoso de coco, sem adição de açúcar.",
+    "about": "Iogurte proteico por fora e recheio cremoso de coco por dentro, sem adição de açúcar."
   }
 ]

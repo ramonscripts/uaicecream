@@ -41,11 +41,11 @@ const fotos = [
         </div>
         <h1 class="t-title">{s.name}</h1>
         <p>{s.desc}</p>
-        <p class="t-heading">{brl(PRICE_CAIXA)} <span class="t-small">a caixa com {CAIXA} unidades de 60 g</span></p>
+        <p class="t-heading">{brl(PRICE_CAIXA)} <span class="t-small">a caixa com {CAIXA} unidades</span></p>
         <ul class="buy-facts t-small">
           <li>{brl(PRICE)} por unidade para a loja</li>
-          <li>preço sugerido de revenda: {brl(SUGERIDO)}, com {brl(SUGERIDO - PRICE)} de margem por unidade</li>
-          <li>pedido mínimo de {MINIMO} caixas, que podem ser de sabores diferentes</li>
+          <li>revenda sugerida de {brl(SUGERIDO)}, com {brl(SUGERIDO - PRICE)} de margem por unidade</li>
+          <li>pedido mínimo de {MINIMO} caixas, com sabores iguais ou diferentes</li>
         </ul>
         <span class="ds-field__label">caixas</span>
         <Qty name={s.name} unit="caixa" />

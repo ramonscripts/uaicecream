@@ -5,8 +5,8 @@ import Icon from './Icon.astro';
 import { pontos, emBreve } from '../data/site.js';
 ---
 <div class="pontos" id="onde-encontrar">
-  <Intro label="onde encontrar" title="veja onde está o uaice fit mais próximo de você">
-    <p class="t-small">Demonstração: as lojas abaixo existem, mas ainda não vendem a uaice fit.</p>
+  <Intro label="onde encontrar" title="onde tem uaice fit perto de você">
+    <p class="t-small">Demonstração: estas lojas existem, mas ainda não vendem a uaice fit.</p>
   </Intro>
   {pontos.map(({ cidade, lugares }) => (
     <details class="pontos__cidade">
@@ -38,7 +38,6 @@ import { pontos, emBreve } from '../data/site.js';
       {emBreve.map((cidade) => (
         <li class="pontos__lugar">
           <span class="t-body-strong">{cidade}</span>
-          <span class="t-small">em breve nas lojas da cidade</span>
         </li>
       ))}
     </ul>

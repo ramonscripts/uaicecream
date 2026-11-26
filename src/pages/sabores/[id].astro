@@ -7,7 +7,6 @@ import ProfileCard from '../../components/ProfileCard.astro';
 import Cols from '../../components/Cols.astro';
 import Intro from '../../components/Intro.astro';
 import Button from '../../components/Button.astro';
-import Tag from '../../components/Tag.astro';
 import Pontos from '../../components/Pontos.astro';
 import { sabores, ficha } from '../../data/site.js';
 
@@ -20,10 +19,6 @@ const outros = sabores.filter((o) => o.id !== s.id);
 <Base title={`${s.name} · uaice fit`} description={s.desc}>
   <Section class="sabor-hero media-fit">
     <Feature title={s.name} body={s.about} image={`/img/sabores/${s.id}.jpg`} alt={s.name}>
-      <div slot="top" class="product-tags">
-        <Tag>uaice fit</Tag>
-        {s.tags.map((t) => <Tag>{t}</Tag>)}
-      </div>
       <div class="site-actions site-actions--start">
         <Button href="#onde-encontrar">onde encontrar</Button>
         <Button href={`/comprar/${s.id}`} variant="secondary">pedir para minha loja</Button>
