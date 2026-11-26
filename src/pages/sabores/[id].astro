@@ -19,11 +19,16 @@ const outros = sabores.filter((o) => o.id !== s.id);
 <Base title={`${s.name} · uaice fit`} description={s.desc}>
   <Section class="sabor-hero media-fit">
     <Feature title={s.name} body={s.about} image={`/img/sabores/${s.id}.jpg`} alt={s.name}>
-      <div class="site-actions site-actions--start">
+      <div class="site-actions site-actions--start sabor-acoes--pc">
         <Button href="#onde-encontrar">onde encontrar</Button>
         <Button href={`/comprar/${s.id}`} variant="secondary">pedir para minha loja</Button>
       </div>
     </Feature>
+    <!-- cópia para o celular: lá a foto ocupa a tela e os botões ficam abaixo dela, não por cima -->
+    <div class="site-actions site-actions--start sabor-acoes--cel">
+      <Button href="#onde-encontrar">onde encontrar</Button>
+      <Button href={`/comprar/${s.id}`} variant="secondary">sou lojista</Button>
+    </div>
     <div class="stack-sm">
       <span class="t-label">em cada picolé</span>
       <Cols cards items={ficha} />

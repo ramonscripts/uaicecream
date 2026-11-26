@@ -280,7 +280,12 @@ button.site-menu__item{background:none;border:0;font:inherit;letter-spacing:inhe
   .sabor-hero .ds-feature > .ds-media{position:absolute;inset:0;height:100%;aspect-ratio:auto;border-radius:0}
   .sabor-hero .ds-feature::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--forest) 0,transparent 60%);opacity:.9}
   .sabor-hero .ds-feature__text{position:relative;z-index:1;padding:var(--space-3) var(--space-3) var(--space-5)}
+  .sabor-acoes--pc{display:none}
+  .sabor-acoes--cel{gap:var(--space-2)}  /* os dois botões numa linha só */
+  .sabor-acoes--cel .ds-btn{flex:1 1 auto;padding-left:16px;padding-right:16px;white-space:nowrap}
 }
+/* botões da página do sabor: no computador ficam no texto, no celular abaixo da foto ([id].astro tem as duas cópias) */
+@media (min-width:521px){.sabor-acoes--cel{display:none}}
 
 /* .media-fit no computador (carro-chefe da home e página do sabor): foto inteira (sem cortar em cima) e as laterais preenchidas
    com as cores das bordas da própria foto (site.js calcula e põe em --edge-bg). */
